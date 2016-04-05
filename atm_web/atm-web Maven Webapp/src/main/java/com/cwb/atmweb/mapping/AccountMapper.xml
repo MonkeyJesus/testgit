@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cwb.atmweb.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.cwb.atmweb.entity.Account" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="personId" property="personid" jdbcType="VARCHAR" />
+    <result column="bankId" property="bankid" jdbcType="BIGINT" />
+    <result column="createAddress" property="createaddress" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="ceiling" property="ceiling" jdbcType="DOUBLE" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="loan" property="loan" jdbcType="DOUBLE" />
+    <result column="roleId" property="roleId" jdbcType="VARCHAR" />
+    <result column="defaultLanguage" property="defaultlanguage" jdbcType="VARCHAR" />
+    <result column="exportPath" property="exportpath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, salt, password, personId, bankId, createAddress, address, email, ceiling, 
+    balance, loan, roleId, defaultLanguage, exportPath
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <!-- 根据用户名查找用户 -->
+  <select id="selectByUsername" resultType="com.cwb.atmweb.entity.Account" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where username = #{username}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cwb.atmweb.entity.Account" >
+    insert into account (id, username, salt, 
+      password, personId, bankId, 
+      createAddress, address, email, 
+      ceiling, balance, loan, 
+      roleId, defaultLanguage, exportPath
+      )
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{personid,jdbcType=VARCHAR}, #{bankid,jdbcType=BIGINT}, 
+      #{createaddress,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{ceiling,jdbcType=DOUBLE}, #{balance,jdbcType=DOUBLE}, #{loan,jdbcType=DOUBLE}, 
+      #{roleId,jdbcType=VARCHAR}, #{defaultlanguage,jdbcType=VARCHAR}, #{exportpath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cwb.atmweb.entity.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="personid != null" >
+        personId,
+      </if>
+      <if test="bankid != null" >
+        bankId,
+      </if>
+      <if test="createaddress != null" >
+        createAddress,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="ceiling != null" >
+        ceiling,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="loan != null" >
+        loan,
+      </if>
+      <if test="roleId != null" >
+        roleId,
+      </if>
+      <if test="defaultlanguage != null" >
+        defaultLanguage,
+      </if>
+      <if test="exportpath != null" >
+        exportPath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=BIGINT},
+      </if>
+      <if test="createaddress != null" >
+        #{createaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ceiling != null" >
+        #{ceiling,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="loan != null" >
+        #{loan,jdbcType=DOUBLE},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultlanguage != null" >
+        #{defaultlanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="exportpath != null" >
+        #{exportpath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cwb.atmweb.entity.Account" >
+    update account
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        personId = #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        bankId = #{bankid,jdbcType=BIGINT},
+      </if>
+      <if test="createaddress != null" >
+        createAddress = #{createaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ceiling != null" >
+        ceiling = #{ceiling,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="loan != null" >
+        loan = #{loan,jdbcType=DOUBLE},
+      </if>
+      <if test="roleId != null" >
+        roleId = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultlanguage != null" >
+        defaultLanguage = #{defaultlanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="exportpath != null" >
+        exportPath = #{exportpath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cwb.atmweb.entity.Account" >
+    update account
+    set username = #{username,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      personId = #{personid,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=BIGINT},
+      createAddress = #{createaddress,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      ceiling = #{ceiling,jdbcType=DOUBLE},
+      balance = #{balance,jdbcType=DOUBLE},
+      loan = #{loan,jdbcType=DOUBLE},
+      roleId = #{roleId,jdbcType=VARCHAR},
+      defaultLanguage = #{defaultlanguage,jdbcType=VARCHAR},
+      exportPath = #{exportpath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

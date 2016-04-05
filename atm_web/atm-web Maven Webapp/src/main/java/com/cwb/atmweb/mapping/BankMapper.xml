@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cwb.atmweb.dao.BankMapper" >
+  <resultMap id="BaseResultMap" type="com.cwb.atmweb.entity.Bank" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bankName" property="bankname" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="BIGINT" />
+    <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="totalFunds" property="totalfunds" jdbcType="DOUBLE" />
+    <result column="totalDeposit" property="totaldeposit" jdbcType="DOUBLE" />
+    <result column="totalWithdraw" property="totalwithdraw" jdbcType="DOUBLE" />
+    <result column="totalOverdraft" property="totaloverdraft" jdbcType="DOUBLE" />
+    <result column="totalLoan" property="totalloan" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bankName, parentId, parent_ids, level, totalFunds, totalDeposit, totalWithdraw, 
+    totalOverdraft, totalLoan
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bank
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bank
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cwb.atmweb.entity.Bank" >
+    insert into bank (id, bankName, parentId, 
+      parent_ids, level, totalFunds, 
+      totalDeposit, totalWithdraw, totalOverdraft, 
+      totalLoan)
+    values (#{id,jdbcType=BIGINT}, #{bankname,jdbcType=VARCHAR}, #{parentid,jdbcType=BIGINT}, 
+      #{parentIds,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{totalfunds,jdbcType=DOUBLE}, 
+      #{totaldeposit,jdbcType=DOUBLE}, #{totalwithdraw,jdbcType=DOUBLE}, #{totaloverdraft,jdbcType=DOUBLE}, 
+      #{totalloan,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cwb.atmweb.entity.Bank" >
+    insert into bank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bankname != null" >
+        bankName,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="parentIds != null" >
+        parent_ids,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="totalfunds != null" >
+        totalFunds,
+      </if>
+      <if test="totaldeposit != null" >
+        totalDeposit,
+      </if>
+      <if test="totalwithdraw != null" >
+        totalWithdraw,
+      </if>
+      <if test="totaloverdraft != null" >
+        totalOverdraft,
+      </if>
+      <if test="totalloan != null" >
+        totalLoan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bankname != null" >
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="parentIds != null" >
+        #{parentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="totalfunds != null" >
+        #{totalfunds,jdbcType=DOUBLE},
+      </if>
+      <if test="totaldeposit != null" >
+        #{totaldeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="totalwithdraw != null" >
+        #{totalwithdraw,jdbcType=DOUBLE},
+      </if>
+      <if test="totaloverdraft != null" >
+        #{totaloverdraft,jdbcType=DOUBLE},
+      </if>
+      <if test="totalloan != null" >
+        #{totalloan,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cwb.atmweb.entity.Bank" >
+    update bank
+    <set >
+      <if test="bankname != null" >
+        bankName = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="parentIds != null" >
+        parent_ids = #{parentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="totalfunds != null" >
+        totalFunds = #{totalfunds,jdbcType=DOUBLE},
+      </if>
+      <if test="totaldeposit != null" >
+        totalDeposit = #{totaldeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="totalwithdraw != null" >
+        totalWithdraw = #{totalwithdraw,jdbcType=DOUBLE},
+      </if>
+      <if test="totaloverdraft != null" >
+        totalOverdraft = #{totaloverdraft,jdbcType=DOUBLE},
+      </if>
+      <if test="totalloan != null" >
+        totalLoan = #{totalloan,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cwb.atmweb.entity.Bank" >
+    update bank
+    set bankName = #{bankname,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=BIGINT},
+      parent_ids = #{parentIds,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      totalFunds = #{totalfunds,jdbcType=DOUBLE},
+      totalDeposit = #{totaldeposit,jdbcType=DOUBLE},
+      totalWithdraw = #{totalwithdraw,jdbcType=DOUBLE},
+      totalOverdraft = #{totaloverdraft,jdbcType=DOUBLE},
+      totalLoan = #{totalloan,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cwb.atmweb.dao.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.cwb.atmweb.entity.Employee" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="employeeId" property="employeeid" jdbcType="BIGINT" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="employeeName" property="employeename" jdbcType="VARCHAR" />
+    <result column="personId" property="personid" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="roleId" property="roleId" jdbcType="VARCHAR" />
+    <result column="bankId" property="bankid" jdbcType="BIGINT" />
+    <result column="addBankTime" property="addbanktime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, employeeId, password, salt, employeeName, personId, mobile, address, email, roleId, 
+    bankId, addBankTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <!-- 根据用户名查找用户 -->
+  <select id="selectByUsername" resultType="com.cwb.atmweb.entity.Employee" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where employeeName = #{employeeName}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from employee
+    where employeeName = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cwb.atmweb.entity.Employee" >
+    insert into employee (id, employeeId, password, 
+      salt, employeeName, personId, 
+      mobile, address, email, 
+      roleId, bankId, addBankTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{employeeid,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{employeename,jdbcType=VARCHAR}, #{personid,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=VARCHAR}, #{bankid,jdbcType=BIGINT}, #{addbanktime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cwb.atmweb.entity.Employee" >
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeid != null" >
+        employeeId,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="employeename != null" >
+        employeeName,
+      </if>
+      <if test="personid != null" >
+        personId,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="roleId != null" >
+        roleId,
+      </if>
+      <if test="bankid != null" >
+        bankId,
+      </if>
+      <if test="addbanktime != null" >
+        addBankTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="employeeid != null" >
+        #{employeeid,jdbcType=BIGINT},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="employeename != null" >
+        #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=BIGINT},
+      </if>
+      <if test="addbanktime != null" >
+        #{addbanktime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cwb.atmweb.entity.Employee" >
+    update employee
+    <set >
+      <if test="employeeid != null" >
+        employeeId = #{employeeid,jdbcType=BIGINT},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="employeename != null" >
+        employeeName = #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        personId = #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        roleId = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        bankId = #{bankid,jdbcType=BIGINT},
+      </if>
+      <if test="addbanktime != null" >
+        addBankTime = #{addbanktime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cwb.atmweb.entity.Employee" >
+    update employee
+    set employeeId = #{employeeid,jdbcType=BIGINT},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      employeeName = #{employeename,jdbcType=VARCHAR},
+      personId = #{personid,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      roleId = #{roleId,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=BIGINT},
+      addBankTime = #{addbanktime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
