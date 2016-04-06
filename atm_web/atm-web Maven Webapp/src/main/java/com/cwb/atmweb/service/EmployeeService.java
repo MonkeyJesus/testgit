@@ -13,6 +13,8 @@ public interface EmployeeService {
     Employee selectByPrimaryKey(Long id);
     
     Employee selectByUsername(String employeeName);
+    
+    String selectRoleIdByUsername(String employeeName);
 
     int updateByPrimaryKeySelective(Employee record);
 

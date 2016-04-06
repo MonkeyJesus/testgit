@@ -34,28 +34,13 @@ public class IndexController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	
 	@RequestMapping("/indexer")
 	public void indexer(HttpServletResponse response){
-		System.out.println("==========");
 		Subject subject = SecurityUtils.getSubject();
-		Employee employee = employeeService.selectByUsername(subject.getPrincipal().toString());
-		Role role = roleService.selectByPrimaryKey(Long.parseLong(employee.getRoleId()));
-		String resourceids = role.getResourceIds();
-		String[] rids = resourceids.split(",");
-		List<ResourceInfo> resourceInfos = new ArrayList<ResourceInfo>();
-		for (String id : rids) {
-			Resource r = resourceService.selectByPrimaryKey(Long.parseLong(id));
-			if(r.getType().equals("menu")){
-				ResourceInfo ri = new ResourceInfo(r.getUrl(), "0", "1", r.getId().toString(), r.getName());
-				resourceInfos.add(ri);
-				for (Resource resource : resourceService.selectByParentId(r.getId())) {
-					ResourceInfo ri_ = new ResourceInfo(resource.getUrl(), r.getId().toString(), "2", resource.getId().toString(), resource.getName());
-					resourceInfos.add(ri_);
-				}
-			}
-		}
+		String username = subject.getPrincipal().toString().substring(2);
 		try {
-			response.getWriter().write(JSONArray.toJSONString(resourceInfos).toString());
+			response.getWriter().write(JSONArray.toJSONString(resourceService.getResourceInfos(username)).toString());
 			response.getWriter().flush();
 		} catch (IOException e) {
 			e.printStackTrace();

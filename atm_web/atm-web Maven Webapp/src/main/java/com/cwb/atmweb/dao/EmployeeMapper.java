@@ -13,6 +13,8 @@ public interface EmployeeMapper {
     
     Employee selectByUsername(String employeeName);
 
+    String selectRoleIdByUsername(String employeeName);
+    
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);

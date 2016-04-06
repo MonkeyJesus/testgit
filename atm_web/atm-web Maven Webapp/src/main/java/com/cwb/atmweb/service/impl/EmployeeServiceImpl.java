@@ -48,4 +48,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeMapper.selectByUsername(employeeName);
 	}
 
+	@Override
+	public String selectRoleIdByUsername(String employeeName) {
+		return employeeMapper.selectRoleIdByUsername(employeeName);
+	}
+
 }

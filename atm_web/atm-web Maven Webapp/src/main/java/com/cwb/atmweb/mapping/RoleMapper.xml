@@ -5,17 +5,17 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="role" property="role" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="resource_ids" property="resourceIds" jdbcType="VARCHAR" />
+    <result column="resourceIds" property="resourceIds" jdbcType="VARCHAR" />
     <result column="available" property="available" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, role, description, resource_ids, available
+    id, role, description, resourceIds, available
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultType="com.cwb.atmweb.entity.Role" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from role
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </select>
   
   <!-- 查询 所有角色 -->
@@ -31,7 +31,7 @@
   </delete>
   <insert id="insert" parameterType="com.cwb.atmweb.entity.Role" >
     insert into role (id, role, description, 
-      resource_ids, available)
+      resourceIds, available)
     values (#{id,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{resourceIds,jdbcType=VARCHAR}, #{available,jdbcType=BIT})
   </insert>
@@ -48,7 +48,7 @@
         description,
       </if>
       <if test="resourceIds != null" >
-        resource_ids,
+        resourceIds,
       </if>
       <if test="available != null" >
         available,
@@ -82,7 +82,7 @@
         description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="resourceIds != null" >
-        resource_ids = #{resourceIds,jdbcType=VARCHAR},
+        resourceIds = #{resourceIds,jdbcType=VARCHAR},
       </if>
       <if test="available != null" >
         available = #{available,jdbcType=BIT},
@@ -94,7 +94,7 @@
     update role
     set role = #{role,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      resource_ids = #{resourceIds,jdbcType=VARCHAR},
+      resourceIds = #{resourceIds,jdbcType=VARCHAR},
       available = #{available,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -32,6 +32,7 @@ import com.cwb.atmweb.entity.Account;
 import com.cwb.atmweb.entity.Employee;
 import com.cwb.atmweb.service.AccountService;
 import com.cwb.atmweb.service.EmployeeService;
+import com.cwb.atmweb.service.ResourceService;
 import com.cwb.atmweb.service.RoleService;
 
 import sun.security.krb5.Realm;
@@ -47,6 +48,9 @@ public class UserRealm extends AuthorizingRealm {
 	@Autowired
 	private AccountService accountService;
 	
+	@Autowired
+	private ResourceService resourceService;
+	
 	/**
 	 * 授权
 	 */
@@ -54,11 +58,12 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
 		
-		String username = (String)principals.getPrimaryPrincipal();
+		String username = ((String)principals.getPrimaryPrincipal()).substring(2);
+		String info = ((String)principals.getPrimaryPrincipal()).split("_")[0];
+		
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         authorizationInfo.setRoles(roleService.selectByPrimaryKey(username));
-//        User user = userService.selectByUsername(username);
-//        authorizationInfo.setStringPermissions(roleService.selectAllPermissionByRole(roleService.selectByPrimaryKey(Long.parseLong(user.getRoleIds()))));
+        authorizationInfo.setStringPermissions(resourceService.getPermissions(username));
         return authorizationInfo;
 	}
 	
@@ -78,7 +83,7 @@ public class UserRealm extends AuthorizingRealm {
 			Employee employee = employeeService.selectByUsername(((UsernamePasswordToken) token).getUsername().substring(2));
 			if (employee != null) {
 				
-				SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(employee.getEmployeename(), employee.getPassword(), getName());
+				SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo("0_"+employee.getEmployeename(), employee.getPassword(), getName());
 				authcInfo.setCredentialsSalt(ByteSource.Util.bytes(employee.getEmployeename()+employee.getSalt()));
 				
 				this.setSession("currentUser", employee);
@@ -90,7 +95,7 @@ public class UserRealm extends AuthorizingRealm {
 			Account account = accountService.selectByUsername(((UsernamePasswordToken) token).getUsername().substring(2));
 			if (account != null) {
 				
-				SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(account.getUsername(), account.getPassword(), getName());
+				SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo("1_"+account.getUsername(), account.getPassword(), getName());
 				authcInfo.setCredentialsSalt(ByteSource.Util.bytes(account.getUsername()+account.getSalt()));
 				
 				this.setSession("currentUser", account);

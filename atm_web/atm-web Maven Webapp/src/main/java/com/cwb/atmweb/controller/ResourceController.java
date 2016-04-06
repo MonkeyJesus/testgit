@@ -35,19 +35,33 @@ public class ResourceController {
 	 */
 	@RequestMapping("/resource/view")
 	public String view(HttpServletRequest request,Model model){
-		Subject subject = SecurityUtils.getSubject();
-		if(subject.isPermitted("resource:view")){
-			List<Resource> resources = resourceService.selectAll();
-			model.addAttribute("resources", resources);			
-			return "resource/view";
-		}else{
-			return "noPermission";
-		}
+		List<Resource> resources = resourceService.selectAll();
+		model.addAttribute("resources", resources);			
+		return "resource/view";
+//		if(subject.isPermitted("resource:view")){
+//			return "noPermission";
+//		}else{
+//			return "noPermission";
+//		}
 	}
 	
 	
 	@RequestMapping("/resource/{id}/addPermission")
 	public String addPermission(@PathVariable("id") Long id,HttpServletRequest request,Model model){
+		Resource parent = resourceService.selectByPrimaryKey(id);
+        model.addAttribute("parent", parent);
+        Resource child = new Resource();
+        child.setParentId(id);
+        model.addAttribute("type", "add");
+		return "resource/addResource";
+	}
+	
+	
+	@RequestMapping("/resource/{id}/update")
+	public String update(@PathVariable("id") Long id,HttpServletRequest request,Model model){
+		Resource self = resourceService.selectByPrimaryKey(id);
+		model.addAttribute("self", self);
+		model.addAttribute("type", "update");
 		return "resource/addResource";
 	}
 	
@@ -58,7 +72,7 @@ public class ResourceController {
 	 * @return
 	 */
 	@RequestMapping("/addResource")
-	public String addResource(HttpServletRequest request,Model model){
+	public String addResource(HttpServletRequest request,Model model,Long parentId,String parentIds){
 		String resourcename = request.getParameter("resourcename");
 		String type = request.getParameter("type");
 		String url = "";
@@ -70,6 +84,8 @@ public class ResourceController {
 		resource.setName(resourcename);
 		resource.setType(type);
 		resource.setUrl(url);
+		resource.setParentId(parentId);
+		resource.setParentIds(parentIds);
 		resource.setPermission(permissionStr);
 		
 		resourceService.insert(resource);
