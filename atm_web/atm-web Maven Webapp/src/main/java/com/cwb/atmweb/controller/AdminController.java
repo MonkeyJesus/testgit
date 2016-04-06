@@ -1,0 +1,15 @@
+package com.cwb.atmweb.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/admin/")
+public class AdminController {
+
+	@RequestMapping("resource/view")
+	public String resourceView(){
+		return "resource/view";
+	}
+	
+}
