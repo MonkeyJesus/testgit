@@ -204,26 +204,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 		
 		function loadMenu(resourceType, treeObj){
-			$.ajax({
-				type:"POST",
-				url:"${pageContext.request.contextPath}/indexer",
-				type:"POST",
-				dataType : "json",
-				success:function(data){
-					console.info(data);
-					// 如果返回数据不为空，加载"业务模块"目录
-					if(data != null){
-						// 将返回的数据赋给zTree
-						$.fn.zTree.init($("#"+treeObj), setting, data);
-						zTree = $.fn.zTree.getZTreeObj(treeObj);
-						if( zTree ){
-							// 默认展开所有节点
-							zTree.expandAll(true);
-						}
-					}
-				}
-			});
-            /* data = [
+			
+			data1 = [
 					{"accessPath":"","checked":false,"delFlag":0,"parentID":0,"resourceCode":"","resourceDesc":"","resourceGrade":1,"resourceID":1,"resourceName":"总菜单","resourceOrder":0,"resourceType":""},
                     {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":3,"resourceName":"基础数据","resourceOrder":0,"resourceType":""},
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":37,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":19,"resourceName":"出租方设置","resourceOrder":0,"resourceType":""},
@@ -239,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":55,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":44,"resourceName":"退租申请","resourceOrder":0,"resourceType":""},
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":26,"resourceName":"日常合同扣租","resourceOrder":0,"resourceType":""},
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":17,"resourceName":"通知书审核","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"house_list.html","checked":false,"delFlag":0,"parentID":3,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":7,"resourceName":"房源管理","resourceOrder":0,"resourceType":""},
+		            {"accessPath":"role/view.do","checked":false,"delFlag":0,"parentID":3,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":7,"resourceName":"房源管理","resourceOrder":0,"resourceType":""},
 		            {"accessPath":"loupanchart.html","checked":false,"delFlag":0,"parentID":3,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":8,"resourceName":"承租方管理","resourceOrder":0,"resourceType":""},
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":2,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":5,"resourceName":"房源导出","resourceOrder":0,"resourceType":""},
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":18,"resourceName":"电子合同管理","resourceOrder":0,"resourceType":""},
@@ -273,6 +255,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":60,"resourceName":"合同续订","resourceOrder":0,"resourceType":""},
 		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":58,"resourceName":"合同查询","resourceOrder":0,"resourceType":""}
 		            ];
+			
+			$.ajax({
+				type:"POST",
+				url:"${pageContext.request.contextPath}/indexer",
+				type:"POST",
+				dataType : "json",
+				success:function(data){
+					// 如果返回数据不为空，加载"业务模块"目录
+					if(data != null){
+						data[14].accessPath = "role/view.do";
+						// 将返回的数据赋给zTree
+						console.info(data);
+						$.fn.zTree.init($("#"+treeObj), setting, data);
+						zTree = $.fn.zTree.getZTreeObj(treeObj);
+						if( zTree ){
+							// 默认展开所有节点
+							zTree.expandAll(true);
+						}
+					}
+				}
+			});
+            /* 
 			console.info(data);
             // 如果返回数据不为空，加载"业务模块"目录
             if(data != null){

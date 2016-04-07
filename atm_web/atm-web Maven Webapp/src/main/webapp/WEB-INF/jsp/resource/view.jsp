@@ -100,7 +100,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="ui_content">
 				<div class="ui_tb">
 					<table class="table" id="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
-					<thead>
 				        <tr>
 				            <th>名称</th>
 				            <th>类型</th>
@@ -108,8 +107,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            <th>权限字符串</th>
 				            <th>操作</th>
 				        </tr>
-				    </thead>
-				    <tbody>
 					 <c:forEach items="${resources}" var="resource">
 						
 				            <tr data-tt-id='${resource.id}' <c:if test="${resource.parentId != '0'}">data-tt-parent-id='${resource.parentId}'</c:if><c:if test="${resource.id == '1'}">style=' display:none'</c:if>>
@@ -135,35 +132,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            </tr>
 			            
 			        </c:forEach>
-			        </tbody>
-						<!-- <tr>
-							<th width="30"><input type="checkbox" id="all" onclick="selectOrClearAllCheckbox(this);" />
-							</th>
-							<th>位置</th>
-							<th>房源</th>
-							<th>房源面积</th>
-							<th>计租面积</th>
-							<th>户型</th>
-							<th>建筑结构</th>
-							<th>租赁性质</th>
-							<th>状态</th>
-							<th>操作</th>
-						</tr>
-							<tr>
-								<td><input type="checkbox" name="IDCheck" value="14458579642011" class="acb" /></td>
-								<td>城中区</td>
-								<td>瑞景河畔16号楼1-111</td>
-								<td>65.97㎡</td>
-								<td>65.97㎡</td>
-								<td>一室一厅一卫</td>
-								<td>混凝土</td>
-								<td>公租房</td>
-								<td>建成待租</td>
-								<td>
-									<a href="house_edit.html?fyID=14458579642011" class="edit">编辑</a> 
-									<a href="javascript:del('14458579642011');">删除</a>
-								</td>
-							</tr> -->
 						
 					</table>
 				</div>

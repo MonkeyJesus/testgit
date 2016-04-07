@@ -26,6 +26,10 @@ public class RoleController {
 	private RoleService roleService;
 	
 
+	@RequestMapping("/role/showrole")
+	public String showrole(){
+		return "role/view";
+	}
 	@RequestMapping("/role/addRole")
 	public String jumpAddRole(){
 		return "role/addRole";
@@ -44,17 +48,19 @@ public class RoleController {
 		roleService.insert(role);
 		return "redirect:/role/view";
 	}
-	@RequiresPermissions("asda:werwe")
 	@RequestMapping("/role/view")
 	public String view(HttpServletRequest request,Model model){
 		Subject subject = SecurityUtils.getSubject();
-		if(subject.isPermitted("role:view")){
-			List<Role> roles = roleService.selectAll();
-			model.addAttribute("roles", roles);			
-			return "role/view";
-		}else{
-			return "noPermission";
-		}
+		List<Role> roles = roleService.selectAll();
+		model.addAttribute("roles", roles);			
+		return "role/view";
+//		if(subject.isPermitted("role:view")){
+//			List<Role> roles = roleService.selectAll();
+//			model.addAttribute("roles", roles);			
+//			return "role/view";
+//		}else{
+//			return "noPermission";
+//		}
 	}
 	
 	@RequestMapping("/role/{id}/delete")
