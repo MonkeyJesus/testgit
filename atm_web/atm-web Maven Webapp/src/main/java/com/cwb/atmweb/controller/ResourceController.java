@@ -49,9 +49,7 @@ public class ResourceController {
 	@RequestMapping("/resource/{id}/addPermission")
 	public String addPermission(@PathVariable("id") Long id,HttpServletRequest request,Model model){
 		Resource parent = resourceService.selectByPrimaryKey(id);
-        model.addAttribute("parent", parent);
-        Resource child = new Resource();
-        child.setParentId(id);
+        model.addAttribute("resource", parent);
         model.addAttribute("type", "add");
 		return "resource/addResource";
 	}
@@ -60,7 +58,7 @@ public class ResourceController {
 	@RequestMapping("/resource/{id}/update")
 	public String update(@PathVariable("id") Long id,HttpServletRequest request,Model model){
 		Resource self = resourceService.selectByPrimaryKey(id);
-		model.addAttribute("self", self);
+		model.addAttribute("resource", self);
 		model.addAttribute("type", "update");
 		return "resource/addResource";
 	}
@@ -72,7 +70,7 @@ public class ResourceController {
 	 * @return
 	 */
 	@RequestMapping("/addResource")
-	public String addResource(HttpServletRequest request,Model model,Long parentId,String parentIds){
+	public String addResource(HttpServletRequest request,Model model,Long id,String parentIds){
 		String resourcename = request.getParameter("resourcename");
 		String type = request.getParameter("type");
 		String url = "";
@@ -84,11 +82,35 @@ public class ResourceController {
 		resource.setName(resourcename);
 		resource.setType(type);
 		resource.setUrl(url);
-		resource.setParentId(parentId);
+		resource.setParentId(id);
 		resource.setParentIds(parentIds);
 		resource.setPermission(permissionStr);
 		
 		resourceService.insert(resource);
+		return "redirect:/resource/view";
+	}
+	/**
+	 * 添加资源
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/updateResource")
+	public String updateResource(HttpServletRequest request,Long id,Model model){
+		String resourcename = request.getParameter("resourcename");
+		String type = request.getParameter("type");
+		String url = "";
+		if(type.equals("menu")){
+			url = request.getParameter("url");
+		}
+		String permissionStr = request.getParameter("permissionStr");
+		Resource resource = resourceService.selectByPrimaryKey(id);
+		resource.setName(resourcename);
+		resource.setType(type);
+		resource.setUrl(url);
+		resource.setPermission(permissionStr);
+		
+		resourceService.updateByPrimaryKey(resource);
 		return "redirect:/resource/view";
 	}
 	

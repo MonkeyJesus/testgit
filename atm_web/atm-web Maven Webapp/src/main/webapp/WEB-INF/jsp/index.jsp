@@ -215,7 +215,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					if(data != null){
 						// 将返回的数据赋给zTree
 						$.fn.zTree.init($("#"+treeObj), setting, data);
- 						alert(treeObj);
 						zTree = $.fn.zTree.getZTreeObj(treeObj);
 						if( zTree ){
 							// 默认展开所有节点

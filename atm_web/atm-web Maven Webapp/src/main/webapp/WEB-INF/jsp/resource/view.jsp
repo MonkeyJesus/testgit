@@ -20,14 +20,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <script src="${pageContext.request.contextPath}/resource/static/js/jquery-1.11.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resource/static/jquery-treetable/javascripts/src/jquery.treetable.js"></script>
 <link href="${pageContext.request.contextPath}/resource/style/authority/basic_layout.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resource/style/authority/common_style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/authority/commonAll.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox-1.3.4.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/style/authority/jquery.fancybox-1.3.4.css" media="screen"></link>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/artDialog/artDialog.js?skin=default"></script>
+<script src="${pageContext.request.contextPath}/resource/static/jquery-treetable/javascripts/src/jquery.treetable.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/static/jquery-treetable/stylesheets/jquery.treetable.css">
 <script>
     $(function() {
         $("#table").treetable({ expandable: true }).treetable("expandNode", 1);
@@ -100,36 +102,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<table class="table" id="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
 					<thead>
 				        <tr>
-				            <td>名称</td>
-				            <td>类型</td>
-				            <td>URL路径</td>
-				            <td>权限字符串</td>
-				            <td>操作</td>
+				            <th>名称</th>
+				            <th>类型</th>
+				            <th>URL路径</th>
+				            <th>权限字符串</th>
+				            <th>操作</th>
 				        </tr>
 				    </thead>
 				    <tbody>
 					 <c:forEach items="${resources}" var="resource">
-			            <tr data-tt-id='${resource.id}' style=" border-bottom: 1px solid;" <c:if test="${resource.parentId != '0'}">data-tt-parent-id='${resource.parentId}'</c:if>>
-			                <td>${resource.name}</td>
-			                <td>${resource.type}</td>
-			                <td>${resource.url}</td>
-			                <td>${resource.permission}</td>
-			                <td>
-		                        <%-- <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-		                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-		                       	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a> --%>
-			                    <shiro:hasPermission name="resource:*">
-			                        <c:if test="${resource.type ne 'button'}">
-			                        	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a>
-			                        </c:if>
-			                    </shiro:hasPermission>
-			
-			                    <shiro:hasPermission name="resource:*">
-			                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
+						
+				            <tr data-tt-id='${resource.id}' <c:if test="${resource.parentId != '0'}">data-tt-parent-id='${resource.parentId}'</c:if><c:if test="${resource.id == '1'}">style=' display:none'</c:if>>
+				                <td >${resource.name}</td>
+				                <td>${resource.type}</td>
+				                <td>${resource.url}</td>
+				                <td>${resource.permission}</td>
+				                <td>
+			                        <%-- <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
 			                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-			                    </shiro:hasPermission>
-			                </td>
-			            </tr>
+			                       	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a> --%>
+				                    <shiro:hasPermission name="resource:*">
+				                        <c:if test="${resource.type ne 'button'}">
+				                        	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a>
+				                        </c:if>
+				                    </shiro:hasPermission>
+				
+				                    <shiro:hasPermission name="resource:*">
+				                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
+				                        <a class="deleteBtn" data-id="${resource.id}" href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
+				                    </shiro:hasPermission>
+				                </td>
+				            </tr>
+			            
 			        </c:forEach>
 			        </tbody>
 						<!-- <tr>
