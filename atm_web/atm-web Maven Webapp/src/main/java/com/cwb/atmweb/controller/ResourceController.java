@@ -44,6 +44,15 @@ public class ResourceController {
 //			return "noPermission";
 //		}
 	}
+	@RequestMapping("/select/view")
+	public String select(HttpServletRequest request,Model model){
+		return "select/select";
+//		if(subject.isPermitted("resource:view")){
+//			return "noPermission";
+//		}else{
+//			return "noPermission";
+//		}
+	}
 	
 	
 	@RequestMapping("/resource/{id}/addPermission")
@@ -85,7 +94,7 @@ public class ResourceController {
 		resource.setParentId(id);
 		resource.setParentIds(parentIds);
 		resource.setPermission(permissionStr);
-		
+		resource.setAvailable(true);
 		resourceService.insert(resource);
 		return "redirect:/resource/view";
 	}

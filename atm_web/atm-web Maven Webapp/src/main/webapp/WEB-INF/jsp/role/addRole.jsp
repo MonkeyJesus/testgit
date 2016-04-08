@@ -17,13 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-2.0.0.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/assets/jquery.multiselect.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/assets/style.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/assets/prettify.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/assets/jquery-ui.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/assets/prettify.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/assets/jquery.multiselect.js" charset=gb2312></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/addRole.js"></script>
 
 <style>
