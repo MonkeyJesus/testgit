@@ -1,7 +1,10 @@
 package com.cwb.atmweb.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSONArray;
 import com.cwb.atmweb.entity.Resource;
+import com.cwb.atmweb.entity.ResourceInfo;
 import com.cwb.atmweb.service.ResourceService;
 
 
@@ -99,7 +103,7 @@ public class ResourceController {
 		return "redirect:/resource/view";
 	}
 	/**
-	 * 添加资源
+	 * 编辑资源
 	 * @param request
 	 * @param model
 	 * @return
@@ -139,6 +143,53 @@ public class ResourceController {
 			response.getWriter().flush();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/resource/getResourceTree")
+	public void getResourceTree(HttpServletResponse response){
+		List<Object> list = new ArrayList<Object>();
+		
+		List<Resource> allresource = resourceService.selectAll();
+		for (Resource r : allresource) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(r.getParentId() == 1){
+				map.put("title", r.getName());
+				map.put("expanded", true);
+				List<Map<String, Object>> children = new ArrayList<Map<String,Object>>();
+				if("menu".equals(r.getType())){
+					setChildren(children,r.getId());
+					map.put("folder", true);
+				}
+				map.put("children", children);
+				list.add(map);
+			}
+		}
+		try {
+			response.getWriter().write(JSONArray.toJSONString(list).toString());
+			response.getWriter().flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void setChildren(List<Map<String, Object>> childs, Long parentId){
+		List<Resource> rs = resourceService.selectByParentId(parentId);
+		if(rs!=null){
+			for (Resource r : rs) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("title", r.getName());
+				map.put("expanded", true);
+				Map<String, Object> children = new HashMap<String, Object>();
+				if("menu".equals(r.getType())){
+					List<Map<String, Object>> child = new ArrayList<Map<String,Object>>();
+					map.put("folder", true);
+					setChildren(child,r.getId());
+				}
+				map.put("children", children);
+				childs.add(map);
+			}
 		}
 	}
 }
