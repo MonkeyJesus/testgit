@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${role.role }</td>
 						<td>${role.description }</td>
 						<td>
-							<shiro:hasPermission name="role:update"><a href="/role/update">修改</a></shiro:hasPermission>
+							<shiro:hasPermission name="role:update"><a href="${pageContext.request.contextPath}/role/addRole?roleId=${role.id }">修改</a></shiro:hasPermission>
 							<shiro:hasPermission name="role:delete"><a href="${pageContext.request.contextPath}/role/${role.id }/delete">删除</a></shiro:hasPermission>
 						</td>
 					</tr>

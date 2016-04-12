@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			glyph: glyph_opts,
 			selectMode: 2,
 			/* source: {url: "ajax-tree-taxonomy.json", debugDelay: 1000}, */
-			source: {url: "resource/getResourceTree.do", debugDelay: 1000},
+			source: {url: "${pageContext.request.contextPath}/resource/getResourceTree.do", debugDelay: 1000},
 			/* source: treeData, */ 
 			toggleEffect: { effect: "drop", options: {direction: "left"}, duration: 400 },
 			wide: {
@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				dragDrop: function(node, data) { data.otherNode.copyTo(node, data.hitMode); }
 			},
 			glyph: glyph_opts,
-			source: {url: "resource/getResourceTree.do", debugDelay: 1000},
+			source: {url: "${pageContext.request.contextPath}/resource/getResourceTree.do", debugDelay: 1000},
 			table: {
 				checkboxColumnIdx: 1,
 				nodeColumnIdx: 2

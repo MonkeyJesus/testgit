@@ -31,11 +31,15 @@ public class RoleController {
 		return "role/view";
 	}
 	@RequestMapping("/role/addRole")
-	public String jumpAddRole(){
+	public String jumpAddRole(HttpServletRequest request,Model model){
+		if(request.getParameter("roleId")!=null){
+			Role role = roleService.selectByPrimaryKey(Long.parseLong(request.getParameter("roleId")));
+			model.addAttribute("role", role);
+		}
 		return "role/addRole";
 	}
 	
-	@RequestMapping("/createRole")
+	@RequestMapping("/role/createRole")
 	public String createRole(HttpServletRequest request){
 		String rolename = request.getParameter("rolename");
 		String description = request.getParameter("description");
@@ -46,7 +50,21 @@ public class RoleController {
 		role.setResourceIds(resourceid);
 		role.setAvailable(true);
 		roleService.insert(role);
-		return "redirect:/role/view";
+		return "redirect:/role/view.do";
+	}
+	@RequestMapping("/role/updateRole")
+	public String updateRole(HttpServletRequest request){
+		Long id = Long.parseLong(request.getParameter("roleId"));
+		String rolename = request.getParameter("rolename");
+		String description = request.getParameter("description");
+		String resourceid = request.getParameter("resourceids");
+		Role role = roleService.selectByPrimaryKey(id);
+		role.setRole(rolename);
+		role.setDescription(description);
+		role.setResourceIds(resourceid);
+		role.setAvailable(true);
+		roleService.updateByPrimaryKey(role);
+		return "redirect:/role/view.do";
 	}
 	@RequestMapping("/role/view")
 	public String view(HttpServletRequest request,Model model){
@@ -66,7 +84,7 @@ public class RoleController {
 	@RequestMapping("/role/{id}/delete")
 	public String deleteRole(@PathVariable("id") Long id,HttpServletRequest request,Model model){
 		roleService.deleteByPrimaryKey(id);
-		return "redirect:/role/view";
+		return "redirect:/role/view.do";
 	}
 	
 	@RequestMapping("/searchAllRoles")

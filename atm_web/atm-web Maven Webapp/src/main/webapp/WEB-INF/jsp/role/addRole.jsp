@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,8 +17,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/addRole.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/static/js/jquery-2.0.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.1.min.js" type="text/javascript"></script> -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+
+<link href="${pageContext.request.contextPath}/resource/static/fancytree/ui.fancytree.css" rel="stylesheet" type="text/css"
+	class="skinswitcher">
+
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.dnd.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.edit.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.glyph.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.table.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.wide.js" type="text/javascript"></script>
+
+<link href="${pageContext.request.contextPath}/resource/static/fancytree/prettify.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/prettify.js" type="text/javascript"></script>
+<link href="${pageContext.request.contextPath}/resource/static/fancytree/sample.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath}/resource/static/fancytree/sample.js" type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/static/js/addRole.js"></script>
 
 <style>
 	li{
@@ -27,15 +47,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
-	<form id="addRoleForm" action="createRole.htm" method="post">
-		角色<input type="text" name="rolename"><br>
-		描述<input type="text" name="description"><br>
-		资源
-		<select title="Basic example" multiple="multiple" name="resource_select" size="5" id="resource_select">
-			<option value="1">加载中。。。</option>
-		</select>
-		<input type="text" id="resourceids" name="resourceids" style="display: none;">
-		<button id="add">添加</button>
+	<form id="addRoleForm" method="post">
+		<input id="roleId" name="roleId" type="text" value="<c:if test="${not empty role }">${role.id }</c:if>">
+		角色<input type="text" name="rolename" value="<c:if test="${not empty role }">${role.role }</c:if>"><br>
+		描述<input type="text" name="description" value="<c:if test="${not empty role }">${role.description }</c:if>"><br>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<b>资源</b>
+			</div>
+			<div class="panel-heading">
+				已选资源：<b id="echoSelectionTitle">-</b>
+			</div>
+			<div id="tree" class="panel-body fancytree-colorize-hover fancytree-fade-expander">
+			</div>
+		</div>
+		
+		<div>Selected keys: <input id="echoSelectionKey" name="resourceids" value="<c:if test="${not empty role }">${role.resourceIds }</c:if>"></div>
+		<button id="formBut">提交</button>
 	</form>
 </body>
 </html>

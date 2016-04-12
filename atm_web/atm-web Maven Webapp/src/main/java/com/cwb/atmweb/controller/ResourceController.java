@@ -146,6 +146,10 @@ public class ResourceController {
 		}
 	}
 	
+	/**
+	 * 获得资源树
+	 * @param response
+	 */
 	@RequestMapping("/resource/getResourceTree")
 	public void getResourceTree(HttpServletResponse response){
 		List<Object> list = new ArrayList<Object>();
@@ -155,7 +159,8 @@ public class ResourceController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			if(r.getParentId() == 1){
 				map.put("title", r.getName());
-				map.put("expanded", true);
+				map.put("key", r.getId());
+				map.put("expanded", false);
 				List<Map<String, Object>> children = new ArrayList<Map<String,Object>>();
 				if("menu".equals(r.getType())){
 					setChildren(children,r.getId());
@@ -180,7 +185,8 @@ public class ResourceController {
 			for (Resource r : rs) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("title", r.getName());
-				map.put("expanded", true);
+				map.put("key", r.getId());
+				map.put("expanded", false);
 				Map<String, Object> children = new HashMap<String, Object>();
 				if("menu".equals(r.getType())){
 					List<Map<String, Object>> child = new ArrayList<Map<String,Object>>();
