@@ -16,11 +16,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>SCT-后台系统-素材吧</title>
-	<link href="resource/style/authority/main_css.css" rel="stylesheet" type="text/css" />
-	<link href="resource/style/authority/zTreeStyle.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="resource/scripts/jquery/jquery-1.7.1.js"></script>
-	<script type="text/javascript" src="resource/scripts/zTree/jquery.ztree.core-3.2.js"></script>
-	<script type="text/javascript" src="resource/scripts/authority/commonAll.js"></script>
+	<link href="${pageContext.request.contextPath}/resource/style/authority/main_css.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/resource/style/authority/zTreeStyle.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/jquery/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/zTree/jquery.ztree.core-3.2.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/authority/commonAll.js"></script>
 	<script type="text/javascript">
 		
 		/**获得当前日期**/
@@ -204,58 +204,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 		
 		function loadMenu(resourceType, treeObj){
-			
-			data1 = [
-					{"accessPath":"","checked":false,"delFlag":0,"parentID":0,"resourceCode":"","resourceDesc":"","resourceGrade":1,"resourceID":1,"resourceName":"总菜单","resourceOrder":0,"resourceType":""},
-                    {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":3,"resourceName":"基础数据","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":37,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":19,"resourceName":"出租方设置","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":37,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":20,"resourceName":"租金评定设置","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":2,"resourceName":"摇号配租","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":16,"resourceName":"签约入住","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":24,"resourceName":"公租收费","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":34,"resourceName":"日常业务","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":55,"resourceName":"解约退租","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":30,"resourceName":"统计报表","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":2,"resourceID":37,"resourceName":"系统参数","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":30,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":31,"resourceName":"公租房楼盘表概况","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":55,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":44,"resourceName":"退租申请","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":26,"resourceName":"日常合同扣租","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":17,"resourceName":"通知书审核","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"role/view.do","checked":false,"delFlag":0,"parentID":3,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":7,"resourceName":"房源管理","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"loupanchart.html","checked":false,"delFlag":0,"parentID":3,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":8,"resourceName":"承租方管理","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":2,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":5,"resourceName":"房源导出","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":18,"resourceName":"电子合同管理","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":59,"resourceName":"日常合同续费","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":34,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":35,"resourceName":"房屋资产盘查","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":55,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":45,"resourceName":"物业结算","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":30,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":46,"resourceName":"公租房租赁变动概况","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":30,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":47,"resourceName":"公租房增减变动情况","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":55,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":43,"resourceName":"退租验房","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":34,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":36,"resourceName":"园区企业盘查","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":42,"resourceName":"维修费用审核","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":33,"resourceName":"租金核算","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":2,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":6,"resourceName":"租户导出","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"test.jsp","checked":false,"delFlag":0,"parentID":3,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":32,"resourceName":"家庭成员管理","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":3,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":39,"resourceName":"施工单位管理","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":2,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":9,"resourceName":"配租导入","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":52,"resourceName":"租金缴费","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":25,"resourceName":"租金费用调整","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":34,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":51,"resourceName":"园区企业查询","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":55,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":29,"resourceName":"清账核算","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":30,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":50,"resourceName":"公租房租金收入概况","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":37,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":38,"resourceName":"维修单位设置","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":30,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":48,"resourceName":"个人缴费记录","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":53,"resourceName":"维修费用报销","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":40,"resourceName":"入住验房","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":41,"resourceName":"入住确认","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":56,"resourceName":"租金调整审核","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":30,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":49,"resourceName":"房租缴纳明细","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":55,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":28,"resourceName":"合同解约","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":55,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":54,"resourceName":"财务清账","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":60,"resourceName":"合同续订","resourceOrder":0,"resourceType":""},
-		            {"accessPath":"","checked":false,"delFlag":0,"parentID":16,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":58,"resourceName":"合同查询","resourceOrder":0,"resourceType":""}
-		            ];
-			
 			$.ajax({
 				type:"POST",
 				url:"${pageContext.request.contextPath}/indexer",
@@ -264,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				success:function(data){
 					// 如果返回数据不为空，加载"业务模块"目录
 					if(data != null){
-						data[14].accessPath = "role/view.do";
+						data[14].accessPath = "bank/view.do";
 						// 将返回的数据赋给zTree
 						console.info(data);
 						$.fn.zTree.init($("#"+treeObj), setting, data);
@@ -421,7 +369,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	<span id="here_area">当前位置：系统&nbsp;>&nbsp;系统介绍</span>
 	</div>
     <div id="main">
-      	<iframe name="right" id="rightMain" src="resource/view.do" frameborder="no" scrolling="auto" width="100%" height="100%" allowtransparency="true"/>
+      	<iframe name="right" id="rightMain" src="${pageContext.request.contextPath}/bank/view.do" frameborder="no" scrolling="auto" width="100%" height="100%" allowtransparency="true"/>
     </div>
 </body>
 </html>

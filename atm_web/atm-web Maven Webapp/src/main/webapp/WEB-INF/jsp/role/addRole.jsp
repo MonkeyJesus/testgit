@@ -17,11 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<script type="text/javascript" src="${pageContext.request.contextPath}/resource/static/js/jquery-2.0.0.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-1.12.1.min.js" type="text/javascript"></script> -->
+
+<script src="${pageContext.request.contextPath}/resource/static/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+	
+<%-- <script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery-ui-1.10.4.min.js" type="text/javascript"></script> --%>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+
 
 <link href="${pageContext.request.contextPath}/resource/static/fancytree/ui.fancytree.css" rel="stylesheet" type="text/css"
 	class="skinswitcher">
@@ -33,17 +34,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.table.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/resource/static/fancytree/jquery.fancytree.wide.js" type="text/javascript"></script>
 
+<!-- Start_Exclude: This block is not part of the sample code -->
 <link href="${pageContext.request.contextPath}/resource/static/fancytree/prettify.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resource/static/fancytree/prettify.js" type="text/javascript"></script>
 <link href="${pageContext.request.contextPath}/resource/static/fancytree/sample.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resource/static/fancytree/sample.js" type="text/javascript"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resource/static/js/addRole.js"></script>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resource/static/js/addRole.js" type="text/javascript"></script>
 
-<style>
-	li{
-		list-style: none;
-	}
-</style>
 </head>
 
 <body>
