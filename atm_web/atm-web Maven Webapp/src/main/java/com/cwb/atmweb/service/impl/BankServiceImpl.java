@@ -52,8 +52,8 @@ public class BankServiceImpl implements BankService {
 	}
 
 	@Override
-	public List<City> getCityByCode(String pCode) {
-		return bankMapper.getCityByCode(pCode);
+	public List<City> getCityByCode(String parentId) {
+		return bankMapper.getCityByCode(parentId);
 	}
 
 }

@@ -20,5 +20,5 @@ public interface BankMapper {
 
     int updateByPrimaryKey(Bank record);
     
-    List<City> getCityByCode(String pCode);
+    List<City> getCityByCode(String parentId);
 }

@@ -174,8 +174,8 @@ $(function(){
 	function showProvinces(provinces) {
 		var provincesHtml = "";
 		for (var i = 0; i < provinces.length; i++) {
-			provincesHtml += ' <option value="' + provinces[i].code + '">'
-					+ provinces[i].name + '</option>';
+			provincesHtml += ' <option value="' + provinces[i].id + '">'
+					+ provinces[i].areaname + '</option>';
 		}
 		$("#province").append(provincesHtml);
 	}
@@ -197,9 +197,12 @@ $(function(){
 			dataType:"json",
 			async : true,
 			success : function(json) {
-				if (json!=null)
+				console.info(json);
+				if (json.length==1){
+					getCitys(json[0].id);
+				}else if(json.length>1){
 					showCitys(json);
-				else {
+				}else{
 					alert("城市解析错误！");
 				}
 			}
@@ -210,11 +213,10 @@ $(function(){
 		var obj = document.getElementById('city');
 		$("#city option:gt(0)").remove();
 		var citys = json;
-		console.info(citys);
 		var citysHtml = "";
 		for (var i = 0; i < citys.length; i++) {
 			citysHtml += ' <option value="' + citys[i].id + '">'
-					+ citys[i].name + '</option>';
+					+ citys[i].areaname + '</option>';
 		}
 		$("#city").append(citysHtml);
 	}

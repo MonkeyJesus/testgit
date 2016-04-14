@@ -22,9 +22,9 @@
 
 	<!-- 获取指定省份的城市列表 -->
 	<select id="getCityByCode" parameterType="string"
-		resultType="com.cwb.atmweb.entity.City">
-		SELECT id, name, code from city WHERE pCode =
-		#{pCode}
+		resultType="com.cwb.atmweb.entity.Area">
+		SELECT id, areaname, areacode,zipcode,level,sort,position from area WHERE parentId =
+		#{parentId}
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

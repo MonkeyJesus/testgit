@@ -16,7 +16,7 @@ public interface BankService {
     
     List<Bank> selectAll();
     
-    List<City> getCityByCode(String pCode);
+    List<City> getCityByCode(String parentId);
 
     int updateByPrimaryKeySelective(Bank record);
 
