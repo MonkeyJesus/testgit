@@ -1,6 +1,7 @@
 package com.cwb.atmweb.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,8 @@ public class BankServiceImpl implements BankService {
 	}
 
 	@Override
-	public List<Bank> selectAll() {
-		return bankMapper.selectAll();
+	public List<Bank> selectAll(Map<String, Object> condition) {
+		return bankMapper.selectAll(condition);
 	}
 
 	@Override

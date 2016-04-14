@@ -10,6 +10,8 @@ public interface AtmInfoMapper {
     int insertSelective(AtmInfo record);
 
     AtmInfo selectByPrimaryKey(Long id);
+    
+    Long selectAtmCountByBankId(Long bankId);
 
     int updateByPrimaryKeySelective(AtmInfo record);
 

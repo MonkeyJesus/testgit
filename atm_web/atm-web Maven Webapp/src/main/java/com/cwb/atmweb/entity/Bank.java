@@ -4,6 +4,8 @@ public class Bank {
     private Long id;
 
     private String bankname;
+    
+    private int areaId;
 
     private Long parentid;
 
@@ -21,83 +23,114 @@ public class Bank {
 
     private Double totalloan;
 
-    public Long getId() {
-        return id;
-    }
+	public Bank() {
+		super();
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Bank(Long id, String bankname, int areaId, Long parentid,
+			String parentIds, Integer level, Double totalfunds,
+			Double totaldeposit, Double totalwithdraw, Double totaloverdraft,
+			Double totalloan) {
+		super();
+		this.id = id;
+		this.bankname = bankname;
+		this.areaId = areaId;
+		this.parentid = parentid;
+		this.parentIds = parentIds;
+		this.level = level;
+		this.totalfunds = totalfunds;
+		this.totaldeposit = totaldeposit;
+		this.totalwithdraw = totalwithdraw;
+		this.totaloverdraft = totaloverdraft;
+		this.totalloan = totalloan;
+	}
 
-    public String getBankname() {
-        return bankname;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setBankname(String bankname) {
-        this.bankname = bankname == null ? null : bankname.trim();
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getParentid() {
-        return parentid;
-    }
+	public String getBankname() {
+		return bankname;
+	}
 
-    public void setParentid(Long parentid) {
-        this.parentid = parentid;
-    }
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
 
-    public String getParentIds() {
-        return parentIds;
-    }
+	public int getAreaId() {
+		return areaId;
+	}
 
-    public void setParentIds(String parentIds) {
-        this.parentIds = parentIds == null ? null : parentIds.trim();
-    }
+	public void setAreaId(int areaId) {
+		this.areaId = areaId;
+	}
 
-    public Integer getLevel() {
-        return level;
-    }
+	public Long getParentid() {
+		return parentid;
+	}
 
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
+	public void setParentid(Long parentid) {
+		this.parentid = parentid;
+	}
 
-    public Double getTotalfunds() {
-        return totalfunds;
-    }
+	public String getParentIds() {
+		return parentIds;
+	}
 
-    public void setTotalfunds(Double totalfunds) {
-        this.totalfunds = totalfunds;
-    }
+	public void setParentIds(String parentIds) {
+		this.parentIds = parentIds;
+	}
 
-    public Double getTotaldeposit() {
-        return totaldeposit;
-    }
+	public Integer getLevel() {
+		return level;
+	}
 
-    public void setTotaldeposit(Double totaldeposit) {
-        this.totaldeposit = totaldeposit;
-    }
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 
-    public Double getTotalwithdraw() {
-        return totalwithdraw;
-    }
+	public Double getTotalfunds() {
+		return totalfunds;
+	}
 
-    public void setTotalwithdraw(Double totalwithdraw) {
-        this.totalwithdraw = totalwithdraw;
-    }
+	public void setTotalfunds(Double totalfunds) {
+		this.totalfunds = totalfunds;
+	}
 
-    public Double getTotaloverdraft() {
-        return totaloverdraft;
-    }
+	public Double getTotaldeposit() {
+		return totaldeposit;
+	}
 
-    public void setTotaloverdraft(Double totaloverdraft) {
-        this.totaloverdraft = totaloverdraft;
-    }
+	public void setTotaldeposit(Double totaldeposit) {
+		this.totaldeposit = totaldeposit;
+	}
 
-    public Double getTotalloan() {
-        return totalloan;
-    }
+	public Double getTotalwithdraw() {
+		return totalwithdraw;
+	}
 
-    public void setTotalloan(Double totalloan) {
-        this.totalloan = totalloan;
-    }
+	public void setTotalwithdraw(Double totalwithdraw) {
+		this.totalwithdraw = totalwithdraw;
+	}
+
+	public Double getTotaloverdraft() {
+		return totaloverdraft;
+	}
+
+	public void setTotaloverdraft(Double totaloverdraft) {
+		this.totaloverdraft = totaloverdraft;
+	}
+
+	public Double getTotalloan() {
+		return totalloan;
+	}
+
+	public void setTotalloan(Double totalloan) {
+		this.totalloan = totalloan;
+	}
+
 }

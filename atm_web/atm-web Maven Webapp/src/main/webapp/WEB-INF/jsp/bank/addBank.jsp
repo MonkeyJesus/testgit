@@ -81,6 +81,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </select>
 			</div>
 		</div>
+		<div id="box_parent" style=" display: none">
+			<div id="box_top">上级银行</div>
+			<div id="box_center">
+				选择上级银行
+				<select name="fangyuanEntity.fyDhCode" id="parentBank" class="ui_select01">
+                	<option id="seclectBank" value="" selected="selected">选择上级银行</option>
+                </select>
+			</div>
+		</div>
 		<div id="box_name">
 			<div id="box_top">银行名</div>
 			<div id="box_center">
@@ -118,12 +127,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <script>
 	$(function(){
+		$("#level").change(function(){
+			if($("#level").val()>1){
+				$("#box_parent").css("display","block");
+				var areaId = 0;
+				if($("#level").val() == 2){
+					if($("#province").val() != ""){
+						areaId = $("#province").val();
+					}
+				}else if($("#level").val() == 3){
+					if($("#city").val() != ""){
+						areaId = $("#city").val();
+					}
+				}else if($("#level").val() == 4){
+					if($("#area").val() != ""){
+						areaId = $("#area").val();
+					}
+				}
+				$.ajax({
+					url:"bank/selectAllBanks.json",
+					type:"POST",
+					data:{
+						"areaId":areaId
+					},
+					dataType:"json",
+					success:function(data){
+						if(data!=null){
+							console.info(data);
+							showBanks(data);
+						}
+					}
+				});
+			}else{
+				$("#box_parent").css("display","none");
+			}
+			
+		});
+		
+		//显示银行列表
+		function showBanks(banks) {
+			var banksHtml = "";
+			for (var i = 0; i < banks.length; i++) {
+				banksHtml += ' <option value="' + banks[i].id + '">'
+						+ banks[i].bankname + '</option>';
+			}
+			$("#parentBank").append(banksHtml);
+		}
+		//加载省市区
 		getProvinces();
 		$("#province").change(function(){
 			getCitys($("#province").val(),"city");
+			$("#area option:not(:first)").remove();
+			$("#street").attr("disabled",false); 
+			$("#street option:not(:first)").remove();
 		});
 		$("#city").change(function(){
 			getCitys($("#city").val(),"area");
+			getBankByCity($("#city").val());
+			$("#street").attr("disabled",false);
+			$("#street option:not(:first)").remove();
 		});
 		$("#area").change(function(){
 			getCitys($("#area").val(),"street");
@@ -156,8 +218,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#province").append(provincesHtml);
 		}
 		function showCitys(json,doc) {
-			console.info(json);
-			var obj = document.getElementById(doc);
 			$("#"+doc+" option:gt(0)").remove();
 			var citys = json;
 			var citysHtml = "";
@@ -189,7 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}else if(json.length>1){
 						showCitys(json,doc);
 					}else{
-						alert("城市解析错误！");
+						$("#"+doc).attr("disabled",true); 
 					}
 				}
 			});
@@ -199,6 +259,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		$("#addATM").click(function(){
+			$.ajax({
+				type:"POST",
+				url:"atminfo/getNewAtmId",
+				success:function(data){
+										
+				}
+			});
 			var str = "<tr><td>1</td><td><a href='#' id='brand'>选择制造商</a></td><td><a href='#' id='model'>选择机型</a></td><td><a href='#' id='first_money'>设置初始金额</a></td><td><span class='glyphicon glyphicon-remove' style='cursor: pointer; color: rgb(4,69,153);'></span></td></tr>"
 			$("#tb").append($(str));
 			$("#tb").find("#brand").editable({

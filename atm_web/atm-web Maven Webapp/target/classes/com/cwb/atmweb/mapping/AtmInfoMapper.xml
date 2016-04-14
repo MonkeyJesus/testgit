@@ -4,11 +4,13 @@
   <resultMap id="BaseResultMap" type="com.cwb.atmweb.entity.AtmInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="bankId" property="bankid" jdbcType="BIGINT" />
-    <result column="equipmentInfo" property="equipmentinfo" jdbcType="VARCHAR" />
-    <result column="idBreakDown" property="idbreakdown" jdbcType="INTEGER" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="firstMoney" property="firstmoney" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bankId, equipmentInfo, idBreakDown
+    id, bankId, brand, model, createTime, firstMoney
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -16,15 +18,23 @@
     from atminfo
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <!-- 获取新atm的id -->
+  <select id="selectAtmCountByBankId" resultType="java.lang.Long" parameterType="java.lang.Long">
+    select count(id)
+    from atminfo
+    where bankId = #{bankId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from atminfo
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.cwb.atmweb.entity.AtmInfo" >
-    insert into atminfo (id, bankId, equipmentInfo, 
-      idBreakDown)
-    values (#{id,jdbcType=BIGINT}, #{bankid,jdbcType=BIGINT}, #{equipmentinfo,jdbcType=VARCHAR}, 
-      #{idbreakdown,jdbcType=INTEGER})
+    insert into atminfo (id, bankId, brand, 
+      model, createTime, firstMoney
+      )
+    values (#{id,jdbcType=BIGINT}, #{bankid,jdbcType=BIGINT}, #{brand,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{firstmoney,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cwb.atmweb.entity.AtmInfo" >
     insert into atminfo
@@ -35,11 +45,17 @@
       <if test="bankid != null" >
         bankId,
       </if>
-      <if test="equipmentinfo != null" >
-        equipmentInfo,
+      <if test="brand != null" >
+        brand,
       </if>
-      <if test="idbreakdown != null" >
-        idBreakDown,
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="firstmoney != null" >
+        firstMoney,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -49,11 +65,17 @@
       <if test="bankid != null" >
         #{bankid,jdbcType=BIGINT},
       </if>
-      <if test="equipmentinfo != null" >
-        #{equipmentinfo,jdbcType=VARCHAR},
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
       </if>
-      <if test="idbreakdown != null" >
-        #{idbreakdown,jdbcType=INTEGER},
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstmoney != null" >
+        #{firstmoney,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -63,11 +85,17 @@
       <if test="bankid != null" >
         bankId = #{bankid,jdbcType=BIGINT},
       </if>
-      <if test="equipmentinfo != null" >
-        equipmentInfo = #{equipmentinfo,jdbcType=VARCHAR},
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
       </if>
-      <if test="idbreakdown != null" >
-        idBreakDown = #{idbreakdown,jdbcType=INTEGER},
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstmoney != null" >
+        firstMoney = #{firstmoney,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -75,8 +103,10 @@
   <update id="updateByPrimaryKey" parameterType="com.cwb.atmweb.entity.AtmInfo" >
     update atminfo
     set bankId = #{bankid,jdbcType=BIGINT},
-      equipmentInfo = #{equipmentinfo,jdbcType=VARCHAR},
-      idBreakDown = #{idbreakdown,jdbcType=INTEGER}
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      firstMoney = #{firstmoney,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -45,7 +45,11 @@ public class BankController {
 	 */
 	@RequestMapping("/bank/view")
 	public String view(HttpServletRequest request,Model model){
-		List<Bank> banks = bankService.selectAll();
+		Map<String, Object> condition = new HashMap<String, Object>();
+		for ( String key : request.getParameterMap().keySet()) {
+			condition.put(key, request.getParameterMap().get(key)[0]);
+		}
+		List<Bank> banks = bankService.selectAll(condition);
 		model.addAttribute("banks", banks);			
 		return "bank/view";
 	}
@@ -65,15 +69,20 @@ public class BankController {
 			e.printStackTrace();
 		}
 	}
-//	@RequestMapping("/select/view")
-//	public String select(HttpServletRequest request,Model model){
-//		return "select/select";
-////		if(subject.isPermitted("resource:view")){
-////			return "noPermission";
-////		}else{
-////			return "noPermission";
-////		}
-//	}
+	@RequestMapping("/bank/selectAllBanks")
+	public void selectAllBanks(HttpServletRequest request,HttpServletResponse response , Model model){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		for ( String key : request.getParameterMap().keySet()) {
+			condition.put(key, request.getParameterMap().get(key)[0]);
+		}
+		List<Bank> banks = bankService.selectAll(condition);
+		try {
+			response.getWriter().write(JSONArray.toJSONString(banks).toString());
+			response.getWriter().flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 //	
 //	
 //	@RequestMapping("/resource/{id}/addPermission")

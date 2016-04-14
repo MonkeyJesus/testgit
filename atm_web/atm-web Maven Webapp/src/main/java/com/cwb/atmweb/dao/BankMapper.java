@@ -1,6 +1,7 @@
 package com.cwb.atmweb.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cwb.atmweb.entity.Bank;
 import com.cwb.atmweb.entity.City;
@@ -14,7 +15,7 @@ public interface BankMapper {
 
     Bank selectByPrimaryKey(Long id);
     
-    List<Bank> selectAll();
+    List<Bank> selectAll(Map<String, Object> condition);
 
     int updateByPrimaryKeySelective(Bank record);
 
