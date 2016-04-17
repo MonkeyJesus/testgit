@@ -57,4 +57,9 @@ public class BankServiceImpl implements BankService {
 		return bankMapper.getCityByCode(parentId);
 	}
 
+	@Override
+	public Long selectTotalCount(Map<String, Object> condition) {
+		return bankMapper.selectTotalCount(condition);
+	}
+
 }

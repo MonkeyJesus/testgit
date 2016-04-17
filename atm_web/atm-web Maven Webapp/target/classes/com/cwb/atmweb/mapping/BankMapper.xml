@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cwb.atmweb.dao.BankMapper">
 	<sql id="Base_Column_List">
-		id, bankName,areaId, parentId, parent_ids, level, totalFunds, totalDeposit,
+		id, bankName, provinceId,cityId,areaId,streetId, parentId, parent_ids, level, totalFunds, totalDeposit,
 		totalWithdraw,
 		totalOverdraft, totalLoan
 	</sql>
@@ -19,8 +19,48 @@
 		<include refid="Base_Column_List" />
 		from bank
 		where 1=1
+		<if test="provinceId != null and provinceId != 0">
+			and provinceId = #{provinceId}
+		</if>
+		<if test="cityId != null and cityId != 0">
+			and cityId = #{cityId}
+		</if>
 		<if test="areaId != null and areaId != 0">
 			and areaId = #{areaId}
+		</if>
+		<if test="streetId != null and streetId != 0">
+			and streetId = #{streetId}
+		</if>
+		<if test="parentId != null and parentId != 0">
+			and parentId = #{parentId}
+		</if>
+		<if test="level != null and level != 0">
+			and level = #{level}
+		</if>
+		<if test="strat != null and start != 0">
+			limit #{start},#{end}
+		</if>
+	</select>
+	<!-- 查询符合条件银行的数量 -->
+	<select id="selectTotalCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select
+		count(id)
+		from bank
+		where 1=1
+		<if test="provinceId != null and provinceId != 0">
+			and provinceId = #{provinceId}
+		</if>
+		<if test="cityId != null and cityId != 0">
+			and cityId = #{cityId}
+		</if>
+		<if test="areaId != null and areaId != 0">
+			and areaId = #{areaId}
+		</if>
+		<if test="streetId != null and streetId != 0">
+			and streetId = #{streetId}
+		</if>
+		<if test="level != null and level != 0">
+			and level = #{level}
 		</if>
 	</select>
 
@@ -36,12 +76,15 @@
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.cwb.atmweb.entity.Bank">
-		insert into bank (id,areaId, bankName, parentId,
+		insert into bank (id, bankName,provinceId,cityId,areaId,streetId, parentId,
 		parent_ids, level, totalFunds,
 		totalDeposit, totalWithdraw, totalOverdraft,
 		totalLoan)
 		values (#{id,jdbcType=BIGINT}, #{bankname,jdbcType=VARCHAR},
+		#{provinceId},
+		#{cityId},
 		#{areaId},
+		#{streetId},
 		#{parentid,jdbcType=BIGINT},
 		#{parentIds,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{totalfunds,jdbcType=DOUBLE},
 		#{totaldeposit,jdbcType=DOUBLE}, #{totalwithdraw,jdbcType=DOUBLE},
@@ -57,8 +100,17 @@
 			<if test="bankname != null">
 				bankName,
 			</if>
+			<if test="provinceId != null">
+				provinceId,
+			</if>
+			<if test="cityId != null">
+				cityId,
+			</if>
 			<if test="areaId != null">
 				areaId,
+			</if>
+			<if test="streetId != null">
+				streetId,
 			</if>
 			<if test="parentid != null">
 				parentId,
@@ -92,8 +144,17 @@
 			<if test="bankname != null">
 				#{bankname,jdbcType=VARCHAR},
 			</if>
+			<if test="provinceId != null">
+				#{provinceId},
+			</if>
+			<if test="cityId != null">
+				#{cityId},
+			</if>
 			<if test="areaId != null">
 				#{areaId},
+			</if>
+			<if test="streetId != null">
+				#{streetId},
 			</if>
 			<if test="parentid != null">
 				#{parentid,jdbcType=BIGINT},
@@ -127,6 +188,18 @@
 			<if test="bankname != null">
 				bankName = #{bankname,jdbcType=VARCHAR},
 			</if>
+			<if test="provinceId != null">
+				#{provinceId},
+			</if>
+			<if test="cityId != null">
+				#{cityId},
+			</if>
+			<if test="areaId != null">
+				#{areaId},
+			</if>
+			<if test="streetId != null">
+				#{streetId},
+			</if>
 			<if test="parentid != null">
 				parentId = #{parentid,jdbcType=BIGINT},
 			</if>
@@ -157,6 +230,10 @@
 	<update id="updateByPrimaryKey" parameterType="com.cwb.atmweb.entity.Bank">
 		update bank
 		set bankName = #{bankname,jdbcType=VARCHAR},
+		provinceId = #{provinceId},
+		cityId = #{cityId},
+		areaId = #{areaId},
+		streetId = #{streetId},
 		parentId = #{parentid,jdbcType=BIGINT},
 		parent_ids = #{parentIds,jdbcType=VARCHAR},
 		level = #{level,jdbcType=INTEGER},

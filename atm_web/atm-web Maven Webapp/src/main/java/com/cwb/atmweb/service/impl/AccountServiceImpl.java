@@ -48,4 +48,9 @@ public class AccountServiceImpl implements AccountService {
 		return accountMapper.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public int selectAccountCountByBankId(Long bankId) {
+		return accountMapper.selectAccountCountByBankId(bankId);
+	}
+
 }

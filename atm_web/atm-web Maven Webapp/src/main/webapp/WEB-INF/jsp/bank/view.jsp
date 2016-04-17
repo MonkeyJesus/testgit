@@ -68,7 +68,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div id="box_bottom">
 							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
 							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" onclick="window.location.href='${pageContext.request.contextPath}/bank/addBank.do'"/> 
-							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" /> 
 							<input type="button" value="导入" class="ui_input_btn01" id="importBtn" />
 							<input type="button" value="导出" class="ui_input_btn01" onclick="exportExcel();" />
 						</div>
@@ -79,38 +78,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui_tb">
 					<table class="table" id="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
 				        <tr>
-				            <th>名称</th>
-				            <th>类型</th>
-				            <th>URL路径</th>
-				            <th>权限字符串</th>
+				            <th>ID</th>
+				            <th>银行名字</th>
+				            <th>坐标位置</th>
+				            <th>上级银行</th>
+				            <th>银行级别</th>
 				            <th>操作</th>
 				        </tr>
-					 <c:forEach items="${banks}" var="bank">
-						
-				            <tr>
-				                <td >${resource.name}</td>
-				                <td>${resource.type}</td>
-				                <td>${resource.url}</td>
-				                <td>${resource.permission}</td>
-				                <td>
-			                        <%-- <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-			                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-			                       	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a> --%>
-				                    <shiro:hasPermission name="bank:*">
-				                        <c:if test="${resource.type ne 'button'}">
-				                        	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a>
-				                        </c:if>
-				                    </shiro:hasPermission>
-				
-				                    <shiro:hasPermission name="bank:*">
-				                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-				                        <a class="deleteBtn" href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-				                    </shiro:hasPermission>
-				                </td>
-				            </tr>
-			            
-			        </c:forEach>
-						
 					</table>
 				</div>
 				<div class="ui_tb_h30">
@@ -148,6 +122,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <script>
 $(function(){
+	initTable(1,10);
+	//显示银行
+	function initTable(page,row){
+		$.ajax({
+			url:"bank/showBanks.json",
+			data:{
+				"page":page,
+				"row":row
+			},
+			type:"POST",
+			dataType:"json",
+			success:function(data){
+				console.info(data);
+				var banks = data.list;
+				if(data.list!=null){
+					for(var i = 0;i<banks.length;i++){
+						var trs = "<tr><td>"+banks[i].id+"</td><td>"+banks[i].bankname+"</td><td>"+banks[i].provinceId+"_"+banks[i].cityId+"_"+banks[i].areaId+"_"+banks[i].streetId+"</td>"+
+			                
+			                "<td>"+banks[i].parentid+"</td><td>"+banks[i].level+"</td>"+
+			                
+			                "<td>"+
+		                        "<a href='${pageContext.request.contextPath}/resource/"+banks[i].id+"/update'>修改</a>"+
+		                        "<a class='deleteBtn' href='${pageContext.request.contextPath}/bank/"+banks[i].id+"/delete'>删除</a>"+
+			                "</td></tr>";
+			            $("#table").append($(trs));
+					}
+				}
+			}
+		});
+	}
+	
+	
 	getProvinces();
 	$("#province").change(function(){
 		getCitys($("#province").val());
@@ -197,7 +203,6 @@ $(function(){
 			dataType:"json",
 			async : true,
 			success : function(json) {
-				console.info(json);
 				if (json.length==1){
 					getCitys(json[0].id);
 				}else if(json.length>1){

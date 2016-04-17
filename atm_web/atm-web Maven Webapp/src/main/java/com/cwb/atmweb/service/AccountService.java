@@ -11,6 +11,8 @@ public interface AccountService {
 
     Account selectByPrimaryKey(Long id);
     
+    int selectAccountCountByBankId(Long bankId);
+    
     Account selectByUsername(String username);
 
     int updateByPrimaryKeySelective(Account record);

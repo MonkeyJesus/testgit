@@ -22,6 +22,15 @@
     id, username, salt, password, personId, bankId, createAddress, address, email, ceiling, 
     balance, loan, roleId, defaultLanguage, exportPath
   </sql>
+  
+  <!-- 查询某银行的客户数 -->
+  <select id="selectAccountCountByBankId" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+    select 
+    count(id)
+    from account
+    where bankId = #{bankId}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

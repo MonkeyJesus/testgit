@@ -17,9 +17,11 @@ public interface BankService {
     
     List<Bank> selectAll(Map<String, Object> condition);
     
-    List<City> getCityByCode(String parentId);
+    Long selectTotalCount(Map<String, Object> condition);
 
     int updateByPrimaryKeySelective(Bank record);
 
     int updateByPrimaryKey(Bank record);
+    
+    List<City> getCityByCode(String parentId);
 }

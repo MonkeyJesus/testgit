@@ -16,6 +16,8 @@ public interface BankMapper {
     Bank selectByPrimaryKey(Long id);
     
     List<Bank> selectAll(Map<String, Object> condition);
+    
+    Long selectTotalCount(Map<String, Object> condition);
 
     int updateByPrimaryKeySelective(Bank record);
 

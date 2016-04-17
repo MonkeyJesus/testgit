@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,9 +23,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.cwb.atmweb.dao.AccountMapper;
+import com.cwb.atmweb.entity.AtmInfo;
 import com.cwb.atmweb.entity.Bank;
 import com.cwb.atmweb.entity.City;
+import com.cwb.atmweb.entity.param.BankEmployeeInfo;
+import com.cwb.atmweb.service.AccountService;
+import com.cwb.atmweb.service.AtmInfoService;
 import com.cwb.atmweb.service.BankService;
+import com.cwb.atmweb.service.EmployeeService;
 
 
 @Controller
@@ -31,6 +40,12 @@ public class BankController {
 	
 	@Autowired
 	private BankService bankService;
+	@Autowired
+	private AtmInfoService atmInfoService;
+	@Autowired
+	private EmployeeService employeeService;
+	@Autowired
+	private AccountService accountService;
 	
 	@RequestMapping("/bank/addBank")
 	public String addBank() {
@@ -52,6 +67,126 @@ public class BankController {
 		List<Bank> banks = bankService.selectAll(condition);
 		model.addAttribute("banks", banks);			
 		return "bank/view";
+	}
+	
+	@RequestMapping("/bank/getBankById")
+	@ResponseBody
+	public void getBankById(HttpServletRequest request,HttpServletResponse response,String id){
+		try {
+			response.getWriter().write(JSONObject.toJSONString(bankService.selectByPrimaryKey(Long.parseLong(id))).toString());
+			response.getWriter().flush();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	@RequestMapping("/bank/createBank")
+	public String createBank(String bankName,String provinceId,String cityId, String areaId, String streetId, String parentId,
+			String level, String atm) {
+		Map<String, Object> condition = new HashMap<String, Object>();
+		Long id = null;
+		//分行
+		condition.put("level", level);
+		if(Integer.parseInt(level) == 2l){
+			condition.put("provinceId", provinceId);
+		}else if(Integer.parseInt(level) == 3){
+			condition.put("provinceId", cityId);
+			
+		}
+		Long total = bankService.selectTotalCount(condition);
+		id = Integer.parseInt(provinceId)*1000+total+1;
+		Bank bank = new Bank();
+		bank.setId(id);
+		bank.setBankname(bankName);
+		bank.setProvinceId(Integer.parseInt(provinceId));
+		bank.setCityId(Integer.parseInt(cityId));
+		bank.setAreaId(Integer.parseInt(areaId));
+		bank.setStreetId(Integer.parseInt(streetId.equals("")?"0":streetId));
+		bank.setParentid(Long.parseLong(parentId));
+		bank.setParentIds(bankService.selectByPrimaryKey(Long.parseLong(parentId)).getParentIds()+"_"+parentId);
+		bank.setLevel(Integer.parseInt(level));
+		if(bankService.insert(bank)>0){
+			JSONArray a = JSONArray.parseArray(atm);
+			for(int i=0;i<a.size();i++){
+				JSONObject oo = (JSONObject) JSONObject.parse(a.getString(i));
+				AtmInfo atmInfo = new AtmInfo();
+				atmInfo.setBankid(id);
+				atmInfo.setBrand(oo.getString("brand"));
+				atmInfo.setModel(oo.getString("model"));
+				atmInfo.setFirstmoney(Long.parseLong(oo.getString("first_money")));
+				atmInfoService.insert(atmInfo);
+			}
+		}
+		return "bank/view";
+	}
+	
+	/**
+	 * 分页
+	 * @param request
+	 * @param page
+	 * @param row
+	 * @return
+	 */
+	@RequestMapping("/bank/showBanks")
+	public void showBanks(HttpServletRequest request,HttpServletResponse response,int page,int row){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		for ( String key : request.getParameterMap().keySet()) {
+			condition.put(key, request.getParameterMap().get(key)[0]);
+		}
+		long totalRows = bankService.selectTotalCount(condition);
+		long totalPages = totalRows%row==0?(totalRows/row):(totalRows/row+1);
+		condition.put("start", (page-1)*row);
+		condition.put("end", row);
+		List<Bank> banks = bankService.selectAll(condition);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", banks);
+		map.put("totalPage", totalPages);
+		try {
+			response.getWriter().write(JSONObject.toJSONString(map));
+			response.getWriter().flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 分页
+	 * @param request
+	 * @param page
+	 * @param row
+	 * @return
+	 */
+	@RequestMapping("/bank/showBankEmployees")
+	public void showBankEmployees(HttpServletRequest request,HttpServletResponse response,int page,int row){
+		List<BankEmployeeInfo> beInfos = new ArrayList<BankEmployeeInfo>();
+		Map<String, Object> condition = new HashMap<String, Object>();
+		for ( String key : request.getParameterMap().keySet()) {
+			condition.put(key, request.getParameterMap().get(key)[0]);
+		}
+		long totalRows = bankService.selectTotalCount(condition);
+		long totalPages = totalRows%row==0?(totalRows/row):(totalRows/row+1);
+		condition.put("start", (page-1)*row);
+		condition.put("end", row);
+		List<Bank> banks = bankService.selectAll(condition);
+		for (Bank bank : banks) {
+			BankEmployeeInfo be = new BankEmployeeInfo();
+			be.setBank(bank);
+			be.setEmployeeNum(employeeService.selectEmployeeCountByBankId(bank.getId()));
+			be.setAccountNum(accountService.selectAccountCountByBankId(bank.getId()));
+			beInfos.add(be);
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", beInfos);
+		map.put("totalPage", totalPages);
+		try {
+			response.getWriter().write(JSONObject.toJSONString(map));
+			response.getWriter().flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -83,6 +218,13 @@ public class BankController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping("/bank/{id}/delete")
+	public String deleteRole(@PathVariable("id") Long id,HttpServletRequest request,Model model){
+		bankService.deleteByPrimaryKey(id);
+		return "bank/view";
+	}
+	
 //	
 //	
 //	@RequestMapping("/resource/{id}/addPermission")

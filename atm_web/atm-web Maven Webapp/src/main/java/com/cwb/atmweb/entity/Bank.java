@@ -5,7 +5,13 @@ public class Bank {
 
     private String bankname;
     
+    private int provinceId;
+    
+    private int cityId;
+    
     private int areaId;
+    
+    private int streetId;
 
     private Long parentid;
 
@@ -27,14 +33,16 @@ public class Bank {
 		super();
 	}
 
-	public Bank(Long id, String bankname, int areaId, Long parentid,
-			String parentIds, Integer level, Double totalfunds,
-			Double totaldeposit, Double totalwithdraw, Double totaloverdraft,
-			Double totalloan) {
+	public Bank(Long id, String bankname, int provinceId, int cityId, int areaId, int streetId, Long parentid,
+			String parentIds, Integer level, Double totalfunds, Double totaldeposit, Double totalwithdraw,
+			Double totaloverdraft, Double totalloan) {
 		super();
 		this.id = id;
 		this.bankname = bankname;
+		this.provinceId = provinceId;
+		this.cityId = cityId;
 		this.areaId = areaId;
+		this.streetId = streetId;
 		this.parentid = parentid;
 		this.parentIds = parentIds;
 		this.level = level;
@@ -61,12 +69,36 @@ public class Bank {
 		this.bankname = bankname;
 	}
 
+	public int getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public int getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
 	public int getAreaId() {
 		return areaId;
 	}
 
 	public void setAreaId(int areaId) {
 		this.areaId = areaId;
+	}
+
+	public int getStreetId() {
+		return streetId;
+	}
+
+	public void setStreetId(int streetId) {
+		this.streetId = streetId;
 	}
 
 	public Long getParentid() {

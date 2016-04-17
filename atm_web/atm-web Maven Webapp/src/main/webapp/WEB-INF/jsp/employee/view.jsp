@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'view.jsp' starting page</title>
+<title>员工</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -24,25 +24,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="${pageContext.request.contextPath}/resource/style/authority/common_style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/authority/commonAll.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox.js"></script>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox-1.3.4.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/style/authority/jquery.fancybox-1.3.4.css" media="screen"></link>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/artDialog/artDialog.js?skin=default"></script>
 <script src="${pageContext.request.contextPath}/resource/static/jquery-treetable/javascripts/src/jquery.treetable.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/static/jquery-treetable/stylesheets/jquery.treetable.css">
-<script>
-    $(function() {
-        $("#table").treetable({ expandable: true }).treetable("expandNode", 1);
-        $(".deleteBtn").click(function() {
-            if(confirm("确认删除吗?")) {
-                location.href = "${pageContext.request.contextPath}/resource/"+$(this).data("id")+"/delete";
-            }
-        });
-    });
-</script>
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+<script src="${pageContext.request.contextPath}/resource/jqueryTable/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/jqueryTable/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/jqueryTable/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/jqueryTable/bootstrap-table-expandable.css">
+<script src="${pageContext.request.contextPath}/resource/jqueryTable/bootstrap-table-expandable.js"></script>
+
+<%-- <script src="${pageContext.request.contextPath}/resource/jqueryTable/bootstrap-table-expandable.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resource/jqueryTable/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/jqueryTable/bootstrap-table-expandable.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/jqueryTable/default.css"> --%>
 </head>
 
 <body>
+	<span id="bankid" style=" display: none">${currentUser.bankid}</span>
+	<span id="bankname"></span>
 	<form id="submitForm" name="submitForm" action="" method="post">
 		<input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
 		<input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
@@ -53,44 +56,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div id="box_top">搜索</div>
 						<div id="box_center">
 							选择省
-							<select name="fangyuanEntity.fyXqCode" id="province" class="ui_select01" onchange="getFyDhListByFyXqCode();">
-                                <option value=""
-                                >--请选择--</option>
-                                <option value="6">瑞景河畔</option>
-                                <option value="77">蔚蓝小区</option>
-                                <option value="83">和盛园小区</option>
-                            </select>
-
+							<select name="fangyuanEntity.fyXqCode" id="province" class="ui_select01">
+				               	<option id="seclectProvince" value="" selected="selected">选择省</option>
+				               </select>
+				
 							选择市
-							<select name="fangyuanEntity.fyDhCode" id="fyDh" class="ui_select01">
-                                <option value="">--请选择--</option>
-                            </select>
-							户型
-							<select name="fangyuanEntity.fyHxCode" id="fyHx" class="ui_select01">
-                                <option value="">--请选择--</option>
-                                <option value="76">一室一厅一卫</option>
-                                <option value="10">两室一厅一卫</option>
-                                <option value="14">三室一厅一卫</option>
-                                <option value="71">三室两厅一卫</option>
-                            </select>
-							状态
-							<select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01">
-                                <option value="">--请选择--</option>
-                                <option value="26">在建</option>
-                                <option value="25">建成待租</option>
-                                <option value="13">已配租</option>
-                                <option value="12">已租赁</option>
-                                <option value="24">腾退待租</option>
-                                <option value="23">欠费</option>
-                                <option value="27">其他</option>
-                            </select>
-
-							座落&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" />
+							<select name="fangyuanEntity.fyDhCode" id="city" class="ui_select01">
+				               	<option id="seclectCity" value="" selected="selected">选择市</option>
+				               </select>
+							选择区
+							<select name="fangyuanEntity.fyXqCode" id="area" class="ui_select01">
+				               	<option id="seclectArea" value="" selected="selected">选择区</option>
+				               </select>
+				
+							选择街道
+							<select name="fangyuanEntity.fyDhCode" id="street" class="ui_select01">
+				               	<option id="seclectStreet" value="" selected="selected">选择街道</option>
+				               </select>
 						</div>
 						<div id="box_bottom">
 							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
-							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" /> 
-							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" /> 
+							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" onclick="window.location.href='${pageContext.request.contextPath}/bank/addBank.do'"/> 
 							<input type="button" value="导入" class="ui_input_btn01" id="importBtn" />
 							<input type="button" value="导出" class="ui_input_btn01" onclick="exportExcel();" />
 						</div>
@@ -99,41 +85,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="ui_content">
 				<div class="ui_tb">
-					<table class="table" id="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
-				        <tr>
-				            <th>名称</th>
-				            <th>类型</th>
-				            <th>URL路径</th>
-				            <th>权限字符串</th>
-				            <th>操作</th>
-				        </tr>
-					 <c:forEach items="${resources}" var="resource">
-						
-				            <tr data-tt-id='${resource.id}' <c:if test="${resource.parentId != '0'}">data-tt-parent-id='${resource.parentId}'</c:if><c:if test="${resource.id == '1'}">style=' display:none'</c:if>>
-				                <td >${resource.name}</td>
-				                <td>${resource.type}</td>
-				                <td>${resource.url}</td>
-				                <td>${resource.permission}</td>
-				                <td>
-			                        <%-- <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-			                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-			                       	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a> --%>
-				                    <shiro:hasPermission name="resource:*">
-				                        <c:if test="${resource.type ne 'button'}">
-				                        	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a>
-				                        </c:if>
-				                    </shiro:hasPermission>
-				
-				                    <shiro:hasPermission name="resource:*">
-				                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-				                        <a class="deleteBtn" data-id="${resource.id}" href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-				                    </shiro:hasPermission>
-				                </td>
-				            </tr>
-			            
-			        </c:forEach>
-						
-					</table>
+					
+					<div class="htmleaf-container">
+						<div class="container">
+							<table class="table table-hover table-expandable">
+				                <thead>
+				                    <tr>
+							            <th>ID</th>
+							            <th>银行名字</th>
+							            <th>上级银行</th>
+							            <th>坐标位置</th>
+							            <th>银行级别</th>
+							            <th>员工人数</th>
+							            <th>客户人数</th>
+							            <th>操作</th>
+							        </tr>
+				                </thead>
+								<tbody id="tb">
+								</tbody>
+				            </table>
+						</div>
+					</div>
 				</div>
 				<div class="ui_tb_h30">
 					<div class="ui_flt" style="height: 30px; line-height: 30px;">
@@ -166,45 +138,184 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</form>
-
-
-
-	<%-- <table id="table" style=" width: 100%;">
-	    <thead>
-	        <tr>
-	            <td>名称</td>
-	            <td>类型</td>
-	            <td>URL路径</td>
-	            <td>权限字符串</td>
-	            <td>操作</td>
-	        </tr>
-	    </thead>
-	    <tbody>
-	        <c:forEach items="${resources}" var="resource">
-	            <tr data-tt-id='${resource.id}' style=" border-bottom: 1px solid;" <c:if test="${resource.parentId != '0'}">data-tt-parent-id='${resource.parentId}'</c:if>>
-	                <td>${resource.name}</td>
-	                <td>${resource.type}</td>
-	                <td>${resource.url}</td>
-	                <td>${resource.permission}</td>
-	                <td>
-                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-                       	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a>
-	                    <shiro:hasPermission name="resource:*">
-	                        <c:if test="${resource.type ne 'button'}">
-	                        	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a>
-	                        </c:if>
-	                    </shiro:hasPermission>
-	
-	                    <shiro:hasPermission name="resource:*">
-	                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-	                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-	                    </shiro:hasPermission>
-	                </td>
-	            </tr>
-	        </c:forEach>
-	    </tbody>
-	</table> --%>
 	<br>
 </body>
+<script>
+	$(function(){
+		initTable(1,10);
+		//显示银行
+		function initTable(page,row){
+			$.ajax({
+				url:"bank/showBankEmployees.json",
+				data:{
+					"":$("#bankid").html(),
+					"page":page,
+					"row":row
+				},
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					console.info(data);
+					var banks = data.list;
+					if(data.list!=null){
+						console.info(banks);
+						for(var i = 0;i<banks.length;i++){
+							var trs = "<tr id='bankId"+banks[i].bank.id+"'><td>"+banks[i].bank.id+"</td><td>"+banks[i].bank.bankname+"</td><td>"+banks[i].bank.parentid+"</td><td>"+banks[i].bank.provinceId+"_"+banks[i].bank.cityId+"_"+banks[i].bank.areaId+"_"+banks[i].bank.streetId+"</td>"+
+				                
+				                "<td>"+banks[i].bank.level+"</td><td>"+banks[i].employeeNum+"</td><td>"+banks[i].accountNum+"</td>"+
+				                "<td>"+
+			                        "<a href='${pageContext.request.contextPath}/employee/"+banks[i].bank.id+"/addEmployee'>添加</a>"+
+				                "</td>"+
+				                
+				                "</tr><tr id='employee"+banks[i].bank.id+"' style=' display:none'>"+
+				                "<td colspan='8'>"+
+					                "<table class='table'>"+
+						                "<thead>"+
+							                "<tr>"+
+							                	"<th>员工编号</th>"+
+							                	"<th>姓名</th>"+
+							                	"<th>身份证</th>"+
+							                	"<th>手机号</th>"+
+							                	"<th>角色</th>"+
+							                	"<th>入职时间</th>"+
+							                "</tr>"+
+						                "</thead>"+
+					               		"<tbody id='tb'"+banks[i].bank.id+"></tbody>"+
+					                "</table>"+
+				                "</td></tr>";
+				            $("#tb").append($(trs));
+				            (function(x){
+				            	$("#bankId"+banks[x].bank.id).click(function(){
+				            		if($("#employee"+banks[x].bank.id).css("display") == "none"){
+					            		$("#employee"+banks[x].bank.id).css("display", "block");
+					            		showEmployees(banks[x].bank.id);
+				            		}else{
+					            		$("#employee"+banks[x].bank.id).css("display", "none");
+				            		}
+				            	});
+				            })(i);
+						}
+					}
+				}
+			});
+		}
+		
+		function showEmployees(bankId){
+			
+		}
+		
+		//加载地区下拉框
+		//加载省市区
+		getProvinces();
+		$("#province").change(function() {
+			getCitys($("#province").val(), "city");
+			$("#area option:not(:first)").remove();
+			$("#street").attr("disabled", false);
+			$("#street option:not(:first)").remove();
+			if ($("#level").val() == 3) {
+				var searchData = {
+					"level" : $("#level").val() - 1,
+					"provinceId" : $("#province").val()
+				};
+				searchAndShowBanks(searchData);
+			} else if ($("#level").val() == 4) {
+				var searchData = {
+					"areaId" : $("#areaId").val()
+				};
+				searchAndShowBanks(searchData);
+			}
+			$("#bankName").val("");
+		});
+		$("#city").change(function() {
+			getCitys($("#city").val(), "area");
+			$("#street").attr("disabled", false);
+			$("#street option:not(:first)").remove();
+			$("#bankName").val("");
+		});
+		$("#area").change(function() {
+			getCitys($("#area").val(), "street");
+			$("#bankName").val("");
+		});
+
+		function getProvinces() {
+			$.ajax({
+				url : "bank/getCityInProvince.json",
+				data : {
+					//code : -1,//-1，则查询所有的省份
+					code : 0,
+				},
+				dataType : "json",
+				type : "POST",
+				async : true,
+				success : function(json) {
+					if (json != null) {
+						showProvinces(json);
+					}
+				}
+			});
+		}
+
+		function showProvinces(provinces) {
+			var provincesHtml = "";
+			for (var i = 0; i < provinces.length; i++) {
+				provincesHtml += ' <option value="' + provinces[i].id + '">'
+						+ provinces[i].areaname + '</option>';
+			}
+			$("#province").append(provincesHtml);
+		}
+		function showCitys(json, doc) {
+			$("#" + doc + " option:gt(0)").remove();
+			var citys = json;
+			var citysHtml = "";
+			for (var i = 0; i < citys.length; i++) {
+				citysHtml += ' <option value="' + citys[i].id + '">'
+						+ citys[i].areaname + '</option>';
+			}
+			$("#" + doc).append(citysHtml);
+		}
+
+		function getCitys(provincecode, doc) {
+			if (provincecode == "") {//未选中任何省
+				$("#c" + doc + " option:gt(0)").remove();//删除第一个option之后的所有option
+				return;
+			}
+
+			//选中省
+			$.ajax({
+				url : "bank/getCityInProvince.json",
+				data : {
+					code : provincecode,
+				},
+				type : "POST",
+				dataType : "json",
+				async : true,
+				success : function(json) {
+					if (json.length == 1) {
+						getCitys(json[0].id, doc);
+					} else if (json.length > 1) {
+						showCitys(json, doc);
+					} else {
+						$("#" + doc).attr("disabled", true);
+					}
+				}
+			});
+		}
+		
+		if($("#bankid").html()!=""){
+			$.ajax({
+				url:"bank/getBankById.json",
+				data:{
+					"id":$("#bankid").html()
+				},
+				type:"POST",
+				dataType:"json",
+				async : true,
+				success:function(data){
+					console.info($("#bankname").text());
+					$("#bankname").html(data.bankname);
+				}
+			});
+		}
+	});
+</script>
 </html>

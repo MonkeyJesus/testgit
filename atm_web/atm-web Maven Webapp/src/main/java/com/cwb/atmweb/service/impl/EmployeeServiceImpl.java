@@ -3,6 +3,7 @@ package com.cwb.atmweb.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cwb.atmweb.dao.BankMapper;
 import com.cwb.atmweb.dao.EmployeeMapper;
 import com.cwb.atmweb.entity.Employee;
 import com.cwb.atmweb.service.EmployeeService;
@@ -51,6 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public String selectRoleIdByUsername(String employeeName) {
 		return employeeMapper.selectRoleIdByUsername(employeeName);
+	}
+
+	@Override
+	public int selectEmployeeCountByBankId(Long bankId) {
+		return employeeMapper.selectEmployeeCountByBankId(bankId);
 	}
 
 }

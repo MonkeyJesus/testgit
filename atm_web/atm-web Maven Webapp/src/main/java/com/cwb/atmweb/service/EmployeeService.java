@@ -12,6 +12,8 @@ public interface EmployeeService {
 
     Employee selectByPrimaryKey(Long id);
     
+    int selectEmployeeCountByBankId(Long bankId);
+    
     Employee selectByUsername(String employeeName);
     
     String selectRoleIdByUsername(String employeeName);

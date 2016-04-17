@@ -25,6 +25,14 @@
     from employee
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+  <!-- 查询某银行的员工数 -->
+  <select id="selectEmployeeCountByBankId" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+    select 
+    count(id)
+    from employee
+    where bankId = #{bankId}
+  </select>
   <!-- 根据用户名查找用户 -->
   <select id="selectByUsername" resultType="com.cwb.atmweb.entity.Employee" parameterType="java.lang.String" >
     select 
