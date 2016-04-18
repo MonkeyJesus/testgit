@@ -10,8 +10,11 @@
 <link href="${pageContext.request.contextPath}/resource/style/authority/common_style.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resource/highCharts/highcharts.js"></script>
 <script src="${pageContext.request.contextPath}/resource/highCharts/exporting.js"></script>
+
+<link href="${pageContext.request.contextPath}/resource/highCharts/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resource/highCharts/css/styles.css" rel="stylesheet">
+
 <style type="text/css">
-	${demo.css}
 </style>
 </head>
 <body>
@@ -41,6 +44,86 @@
 				<select name="fangyuanEntity.fyDhCode" id="bank" class="ui_select01">
 	               	<option id="seclectBank" value="" selected="selected">选择银行</option>
 	               </select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-2">
+			<div class="panel panel-blue panel-widget ">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-shopping-cart glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">23423</div>
+						<div class="text-muted">取款</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12 col-lg-2">
+			<div class="panel panel-yellow panel-widget ">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-adjust"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">23423</div>
+						<div class="text-muted">存款</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12 col-lg-2">
+			<div class="panel panel-success panel-widget ">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-shopping-cart glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">12110</div>
+						<div class="text-muted">透支</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12 col-lg-2">
+			<div class="panel panel-orange panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-comment glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">512</div>
+						<div class="text-muted">还信</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12 col-lg-2">
+			<div class="panel panel-teal panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-user glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">2342</div>
+						<div class="text-muted">贷款</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12 col-lg-2">
+			<div class="panel panel-red panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<em class="glyphicon glyphicon-stats glyphicon-l"></em>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large">23423</div>
+						<div class="text-muted">还贷</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -168,20 +251,20 @@ $(function () {
 		});
 	}
 	
-	
+	var aa = "取款";
 	
     $('#container').highcharts({
         title: {
-            text: 'Monthly Average Temperature',
+            text: aa,
             x: -20 //center
         },
         subtitle: {
-            text: 'Source: WorldClimate.com',
+            text: 'ATM',
             x: -20
         },
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: ['1', '2', '3', '4', '5', '6',
+                '7', '8', '9', '10', '11', '12']
         },
         yAxis: {
             title: {
@@ -194,7 +277,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: '°C'
+            valueSuffix: '￥'
         },
         legend: {
             layout: 'vertical',
@@ -203,17 +286,17 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            name: '10001',
+            data: [231, 756, 897, 345, 123, 12, 789, 3454, 4756, 345,234,3453]
         }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+            name: '10002',
+            data: [2321, 346, 897, 3453, 1235, 1452, 7893, 3453, 476, 325,23,345]
         }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+            name: '10003',
+            data: [2621, 3223, 97, 453, 235, 152, 293, 324, 3476, 3325,323,3245]
         }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            name: '10004',
+            data: [321, 3346, 839, 453, 1235, 452, 893, 345, 4376, 4325,123,3245]
         }]
     });
 });
