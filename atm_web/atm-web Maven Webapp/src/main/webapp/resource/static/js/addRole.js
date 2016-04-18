@@ -106,8 +106,8 @@ $(function(){
              var selVals = $.map(data.tree.getSelectedNodes(), function(node){
             	 return node.title;
              });
-             $("#echoSelectionKey").val(selKeys.join(", "));
-             $("#echoSelectionTitle").text(selVals.join(", "));
+             $("#echoSelectionKey").val(selKeys.join(","));
+             $("#echoSelectionTitle").text(selVals.join(","));
          },
 		
 	});

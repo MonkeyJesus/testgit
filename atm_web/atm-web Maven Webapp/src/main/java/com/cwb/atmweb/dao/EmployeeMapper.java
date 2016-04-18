@@ -1,5 +1,8 @@
 package com.cwb.atmweb.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.cwb.atmweb.entity.Employee;
 
 public interface EmployeeMapper {
@@ -10,6 +13,8 @@ public interface EmployeeMapper {
     int insertSelective(Employee record);
 
     Employee selectByPrimaryKey(Long id);
+    
+    List<Employee> selectAll(Map<String, Object> condition);
     
     int selectEmployeeCountByBankId(Long bankId);
     

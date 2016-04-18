@@ -26,6 +26,18 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   
+  
+  
+  <!-- 按条件查询某银行的员工 -->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where 1=1
+    <if test="bankId != null and bankId != 0" >
+        and bankId = #{bankId}
+    </if>
+  </select>
   <!-- 查询某银行的员工数 -->
   <select id="selectEmployeeCountByBankId" resultType="java.lang.Integer" parameterType="java.lang.Long" >
     select 

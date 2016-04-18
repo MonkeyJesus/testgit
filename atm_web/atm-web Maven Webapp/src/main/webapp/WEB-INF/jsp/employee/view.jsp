@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					<div class="htmleaf-container">
 						<div class="container">
-							<table class="table table-hover table-expandable">
+							<table class="table">
 				                <thead>
 				                    <tr>
 							            <th>ID</th>
@@ -169,7 +169,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                
 				                "</tr><tr id='employee"+banks[i].bank.id+"' style=' display:none'>"+
 				                "<td colspan='8'>"+
-					                "<table class='table'>"+
+				                "<div style=' background-color:black; width:100% '>"+
+					               "<table class='table'>"+
 						                "<thead>"+
 							                "<tr>"+
 							                	"<th>员工编号</th>"+
@@ -178,20 +179,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							                	"<th>手机号</th>"+
 							                	"<th>角色</th>"+
 							                	"<th>入职时间</th>"+
+							                	"<th>操作</th>"+
 							                "</tr>"+
 						                "</thead>"+
-					               		"<tbody id='tb'"+banks[i].bank.id+"></tbody>"+
+					               		"<tbody id='tb_emp'"+banks[i].bank.id+"></tbody>"+
 					                "</table>"+
+					                "</div>"+
 				                "</td></tr>";
+				                
 				            $("#tb").append($(trs));
 				            (function(x){
 				            	$("#bankId"+banks[x].bank.id).click(function(){
-				            		if($("#employee"+banks[x].bank.id).css("display") == "none"){
+				            		$("#employee"+banks[x].bank.id).toggle();
+				            		if(!$("#employee"+banks[x].bank.id).is(":hidden")){
+				            			getEmployeesBybankId(banks[x].bank.id);
+				            		}
+				            		/* if($("#employee"+banks[x].bank.id).css("display") == "none"){
 					            		$("#employee"+banks[x].bank.id).css("display", "block");
 					            		showEmployees(banks[x].bank.id);
 				            		}else{
 					            		$("#employee"+banks[x].bank.id).css("display", "none");
-				            		}
+				            		} */
 				            	});
 				            })(i);
 						}
@@ -200,8 +208,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 		
-		function showEmployees(bankId){
-			
+		function getEmployeesBybankId(bankId){
+			$.ajax({
+				url:"employee/getEmployeesBybankId.json",
+				data:{
+					"bankId":bankId
+				},
+				type:"POST",
+				dataType:"json",
+				success:function(employees){
+					if(employees!=null){
+						$("#tb_emp").html("");
+						for(var i = 0;i<employees.length;i++){
+							var trs = "<tr id='employeeId"+employees[i].employeeid+"'>"+
+											"<td>"+employees[i].employeeid+"</td>"+
+											"<td>"+employees[i].employeename+"</td>"+
+											"<td>"+employees[i].personid+"</td>"+
+											"<td>"+employees[i].mobile+"</td>"+
+				                 			"<td>"+employees[i].roleId+"</td>"+
+				                 			"<td>"+employees[i].addbanktime+"</td>"+
+				                			"<td>"+
+			                        			"<a href='${pageContext.request.contextPath}/employee/"+employees[i].employeeid+"/update'>添加</a>"+
+			                        			"<a href='${pageContext.request.contextPath}/employee/"+employees[i].employeeid+"/delete'>删除</a>"+
+				                			"</td>"+
+				                		"</tr>";
+				            $("#tb_emp").append($(trs));
+						}
+					}
+				}
+			});
 		}
 		
 		//加载地区下拉框

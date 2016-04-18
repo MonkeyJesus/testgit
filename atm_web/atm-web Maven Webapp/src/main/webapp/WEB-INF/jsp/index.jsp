@@ -212,8 +212,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				success:function(data){
 					// 如果返回数据不为空，加载"业务模块"目录
 					if(data != null){
-						data[14].accessPath = "bank/view.do";
-						data[4].accessPath = "employee/view.do";
 						// 将返回的数据赋给zTree
 						console.info(data);
 						$.fn.zTree.init($("#"+treeObj), setting, data);

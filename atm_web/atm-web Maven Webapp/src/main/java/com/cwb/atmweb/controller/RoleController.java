@@ -57,7 +57,7 @@ public class RoleController {
 		Long id = Long.parseLong(request.getParameter("roleId"));
 		String rolename = request.getParameter("rolename");
 		String description = request.getParameter("description");
-		String resourceid = request.getParameter("resourceids");
+		String resourceid = request.getParameter("resourceids").replaceAll(" ", "");
 		Role role = roleService.selectByPrimaryKey(id);
 		role.setRole(rolename);
 		role.setDescription(description);
