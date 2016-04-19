@@ -6,11 +6,16 @@
     <result column="bankId" property="bankid" jdbcType="BIGINT" />
     <result column="brand" property="brand" jdbcType="VARCHAR" />
     <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="reader" property="reader" jdbcType="INTEGER" />
+    <result column="printer" property="printer" jdbcType="INTEGER" />
+    <result column="scanner" property="scanner" jdbcType="INTEGER" />
+    <result column="depositSys" property="depositSys" jdbcType="INTEGER" />
+    <result column="drawSys" property="drawSys" jdbcType="INTEGER" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="firstMoney" property="firstmoney" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bankId, brand, model, createTime, firstMoney
+    id, bankId, brand, model,reader,printer,scanner,depositSys,drawSys, createTime, firstMoney
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -30,10 +35,16 @@
   </delete>
   <insert id="insert" parameterType="com.cwb.atmweb.entity.AtmInfo" >
     insert into atminfo (id, bankId, brand, 
-      model, createTime, firstMoney
+      model, reader,printer,scanner,depositSys,drawSys,createTime, firstMoney
       )
     values (#{id,jdbcType=BIGINT}, #{bankid,jdbcType=BIGINT}, #{brand,jdbcType=VARCHAR}, 
-      #{model,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{firstmoney,jdbcType=BIGINT}
+      #{model,jdbcType=VARCHAR},
+      #{reader}, 
+      #{printer}, 
+      #{scanner}, 
+      #{depositSys}, 
+      #{drawSys}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{firstmoney,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cwb.atmweb.entity.AtmInfo" >
@@ -50,6 +61,21 @@
       </if>
       <if test="model != null" >
         model,
+      </if>
+      <if test="reader != null" >
+        reader,
+      </if>
+      <if test="printer != null" >
+        printer,
+      </if>
+      <if test="scanner != null" >
+        scanner,
+      </if>
+      <if test="depositSys != null" >
+        depositSys,
+      </if>
+      <if test="drawSys != null" >
+        drawSys,
       </if>
       <if test="createtime != null" >
         createTime,
@@ -71,6 +97,21 @@
       <if test="model != null" >
         #{model,jdbcType=VARCHAR},
       </if>
+      <if test="reader != null" >
+        #{reader},
+      </if>
+      <if test="printer != null" >
+        #{printer},
+      </if>
+      <if test="scanner != null" >
+        #{scanner},
+      </if>
+      <if test="depositSys != null" >
+        #{depositSys},
+      </if>
+      <if test="drawSys != null" >
+        #{drawSys},
+      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -91,6 +132,21 @@
       <if test="model != null" >
         model = #{model,jdbcType=VARCHAR},
       </if>
+      <if test="reader != null" >
+        reader = #{reader},
+      </if>
+      <if test="printer != null" >
+        printer = #{printer},
+      </if>
+      <if test="scanner != null" >
+        scanner = #{scanner},
+      </if>
+      <if test="depositSys != null" >
+        depositSys = #{depositSys},
+      </if>
+      <if test="drawSys != null" >
+        drawSys = #{drawSys},
+      </if>
       <if test="createtime != null" >
         createTime = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -105,6 +161,11 @@
     set bankId = #{bankid,jdbcType=BIGINT},
       brand = #{brand,jdbcType=VARCHAR},
       model = #{model,jdbcType=VARCHAR},
+      reader = #{reader},
+      printer = #{printer},
+      scanner = #{scanner},
+      depositSys = #{depositSys},
+      drawSys = #{drawSys},
       createTime = #{createtime,jdbcType=TIMESTAMP},
       firstMoney = #{firstmoney,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}

@@ -15,6 +15,46 @@
 <link href="${pageContext.request.contextPath}/resource/highCharts/css/styles.css" rel="stylesheet">
 
 <style type="text/css">
+.sel {
+    width: 105px;
+    text-align: center;
+    padding: 1px 0;
+    border: 1px solid #3580A9;
+    -moz-text-shadow: 0px -1px 0px #2C6AA3;
+    -webkit-text-shadow: 0px -1px 0px #2C6AA3;
+    -o-text-shadow: 0px -1px 0px #2C6AA3;
+    text-shadow: 0px -1px 0px #2C6AA3;
+    color: #D4E6EF;
+    border-radius: 3px 3px 3px 3px;
+    margin: 2px;
+    /* color: #6D6D6D; */
+    /* border: 1px solid #D0D2D4; */
+     background-color: #3580A9;
+}
+.but{
+ 	width: 105px;
+ 	height:40px;
+    text-align: center;
+    padding: 1px 0;
+    border: 1px solid #3580A9;
+    -moz-text-shadow: 0px -1px 0px #2C6AA3;
+    -webkit-text-shadow: 0px -1px 0px #2C6AA3;
+    -o-text-shadow: 0px -1px 0px #2C6AA3;
+    text-shadow: 0px -1px 0px #2C6AA3;
+    color: #D4E6EF;
+    border-radius: 3px 3px 3px 3px;
+    margin: 2px;
+    /* color: #6D6D6D; */
+    /* border: 1px solid #D0D2D4; */
+     background-color: #3580A9;
+}
+
+#left{
+	height: 100%;
+}
+.highC{
+	height: 400px;
+}
 </style>
 </head>
 <body>
@@ -46,90 +86,23 @@
 	               </select>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-md-3 col-lg-2">
-			<div class="panel panel-blue panel-widget ">
-				<div class="row no-padding">
-					<div class="col-sm-4 col-lg-5 widget-left">
-						<em class="glyphicon glyphicon-shopping-cart glyphicon-l"></em>
+		<div id="box_time">
+			<div id="box_top">时间</div>
+			<div id="box_center">
+					<div id="content">
+						时间区间：
+					  	<input type="date"  class="sel" style="width:150px;"> --  <input type="date"  class="sel" style="width:150px;" /> 
+					  	<diV style="margin-left: 30%;margin-top: -3%;">
+					  	<input type="button" value="查询" class="but">
+						<input type="button" value="按年" class="but"> 
+						<input type="button" value="按月" class="but">
+					  	</diV>
+						
 					</div>
-					<div class="col-sm-8 col-lg-7 widget-right">
-						<div class="large">23423</div>
-						<div class="text-muted">取款</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
-			<div class="panel panel-yellow panel-widget ">
-				<div class="row no-padding">
-					<div class="col-sm-4 col-lg-5 widget-left">
-						<em class="glyphicon glyphicon-adjust"></em>
-					</div>
-					<div class="col-sm-8 col-lg-7 widget-right">
-						<div class="large">23423</div>
-						<div class="text-muted">存款</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
-			<div class="panel panel-success panel-widget ">
-				<div class="row no-padding">
-					<div class="col-sm-4 col-lg-5 widget-left">
-						<em class="glyphicon glyphicon-shopping-cart glyphicon-l"></em>
-					</div>
-					<div class="col-sm-8 col-lg-7 widget-right">
-						<div class="large">12110</div>
-						<div class="text-muted">透支</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
-			<div class="panel panel-orange panel-widget">
-				<div class="row no-padding">
-					<div class="col-sm-4 col-lg-5 widget-left">
-						<em class="glyphicon glyphicon-comment glyphicon-l"></em>
-					</div>
-					<div class="col-sm-8 col-lg-7 widget-right">
-						<div class="large">512</div>
-						<div class="text-muted">还信</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
-			<div class="panel panel-teal panel-widget">
-				<div class="row no-padding">
-					<div class="col-sm-4 col-lg-5 widget-left">
-						<em class="glyphicon glyphicon-user glyphicon-l"></em>
-					</div>
-					<div class="col-sm-8 col-lg-7 widget-right">
-						<div class="large">2342</div>
-						<div class="text-muted">贷款</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
-			<div class="panel panel-red panel-widget">
-				<div class="row no-padding">
-					<div class="col-sm-4 col-lg-5 widget-left">
-						<em class="glyphicon glyphicon-stats glyphicon-l"></em>
-					</div>
-					<div class="col-sm-8 col-lg-7 widget-right">
-						<div class="large">23423</div>
-						<div class="text-muted">还贷</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-	<div id="container_table" style="min-width: 310px; height: 400px; margin: 0 auto">
-	</div>
+	<div id="container" style="min-width: 310px; height:60%; margin: 0 auto"></div>
 </body>
 <script type="text/javascript">
 $(function () {
@@ -253,7 +226,7 @@ $(function () {
 		});
 	}
 	
-	var aa = "取款";
+	var aa = "区域ATM机数量增长趋势";
 	
     $('#container').highcharts({
         title: {
@@ -265,12 +238,12 @@ $(function () {
             x: -20
         },
         xAxis: {
-            categories: ['1', '2', '3', '4', '5', '6',
-                '7', '8', '9', '10', '11', '12']
+            categories: ['2004', '2005', '2006', '2007', '2008', '2009',
+                '2010', '2011', '2012', '2013', '2014', '2015']
         },
         yAxis: {
             title: {
-                text: 'money(￥)'
+                text: '个数（个）'
             },
             plotLines: [{
                 value: 0,
@@ -279,7 +252,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: '￥'
+            valueSuffix: '个'
         },
         legend: {
             layout: 'vertical',
@@ -288,17 +261,8 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name: '10001',
-            data: [231, 756, 897, 345, 123, 12, 789, 3454, 4756, 345,234,3453]
-        }, {
-            name: '10002',
-            data: [2321, 346, 897, 3453, 1235, 1452, 7893, 3453, 476, 325,23,345]
-        }, {
-            name: '10003',
-            data: [2621, 3223, 97, 453, 235, 152, 293, 324, 3476, 3325,323,3245]
-        }, {
-            name: '10004',
-            data: [321, 3346, 839, 453, 1235, 452, 893, 345, 4376, 4325,123,3245]
+            name: 'ATM',
+            data: [231, 300, 450, 478, 600, 800, 1089, 1600, 2300, 3342,4090,4200]
         }]
     });
 });

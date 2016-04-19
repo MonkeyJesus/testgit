@@ -10,56 +10,127 @@ public class AtmInfo {
     private String brand;
 
     private String model;
+    
+    private int reader;
+    
+    private int printer;
+    
+    private int scanner;
+    
+    private int depositSys;
+    
+    private int drawSys;
 
     private Date createtime;
 
     private Long firstmoney;
 
-    public Long getId() {
-        return id;
-    }
+	public AtmInfo() {
+		super();
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public AtmInfo(Long id, Long bankid, String brand, String model, int reader, int printer, int scanner,
+			int depositSys, int drawSys, Date createtime, Long firstmoney) {
+		super();
+		this.id = id;
+		this.bankid = bankid;
+		this.brand = brand;
+		this.model = model;
+		this.reader = reader;
+		this.printer = printer;
+		this.scanner = scanner;
+		this.depositSys = depositSys;
+		this.drawSys = drawSys;
+		this.createtime = createtime;
+		this.firstmoney = firstmoney;
+	}
 
-    public Long getBankid() {
-        return bankid;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setBankid(Long bankid) {
-        this.bankid = bankid;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getBrand() {
-        return brand;
-    }
+	public Long getBankid() {
+		return bankid;
+	}
 
-    public void setBrand(String brand) {
-        this.brand = brand == null ? null : brand.trim();
-    }
+	public void setBankid(Long bankid) {
+		this.bankid = bankid;
+	}
 
-    public String getModel() {
-        return model;
-    }
+	public String getBrand() {
+		return brand;
+	}
 
-    public void setModel(String model) {
-        this.model = model == null ? null : model.trim();
-    }
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 
-    public Date getCreatetime() {
-        return createtime;
-    }
+	public String getModel() {
+		return model;
+	}
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
+	public void setModel(String model) {
+		this.model = model;
+	}
 
-    public Long getFirstmoney() {
-        return firstmoney;
-    }
+	public int getReader() {
+		return reader;
+	}
 
-    public void setFirstmoney(Long firstmoney) {
-        this.firstmoney = firstmoney;
-    }
+	public void setReader(int reader) {
+		this.reader = reader;
+	}
+
+	public int getPrinter() {
+		return printer;
+	}
+
+	public void setPrinter(int printer) {
+		this.printer = printer;
+	}
+
+	public int getScanner() {
+		return scanner;
+	}
+
+	public void setScanner(int scanner) {
+		this.scanner = scanner;
+	}
+
+	public int getDepositSys() {
+		return depositSys;
+	}
+
+	public void setDepositSys(int depositSys) {
+		this.depositSys = depositSys;
+	}
+
+	public int getDrawSys() {
+		return drawSys;
+	}
+
+	public void setDrawSys(int drawSys) {
+		this.drawSys = drawSys;
+	}
+
+	public Date getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+
+	public Long getFirstmoney() {
+		return firstmoney;
+	}
+
+	public void setFirstmoney(Long firstmoney) {
+		this.firstmoney = firstmoney;
+	}
+
 }

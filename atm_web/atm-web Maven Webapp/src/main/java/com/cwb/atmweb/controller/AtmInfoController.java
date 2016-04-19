@@ -15,4 +15,29 @@ public class AtmInfoController {
 	public String view(){
 		return "atm/atmdata/view";
 	}
+	
+	@RequestMapping("/atm/view")
+	public String viewatm(){
+		return "atm/atmbug/view";
+	}
+	
+	@RequestMapping("/atm/atmdata/daytop")
+	public String daytop(){
+		return "atm/atmdata/dayTop";
+	}
+	
+	@RequestMapping("/atm/atmdata/operater")
+	public String operater(){
+		return "atm/atmdata/operater";
+	}
+	
+	@RequestMapping("/atm/atmbug/view")
+	public String viewBug(){
+		return "atm/atmbug/view";
+	}
+	
+	@RequestMapping("/atm/atmdata/atmgrowth")
+	public String detail(){
+		return "atm/atmdata/atmgrowth";
+	}
 }
