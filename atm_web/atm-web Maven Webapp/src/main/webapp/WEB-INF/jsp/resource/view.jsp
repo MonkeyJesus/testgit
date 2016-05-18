@@ -115,19 +115,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                <td>${resource.url}</td>
 				                <td>${resource.permission}</td>
 				                <td>
-			                        <%-- <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
-			                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-			                       	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a> --%>
-				                    <shiro:hasPermission name="resource:*">
+				                   <%--  <shiro:hasPermission name="resource:*">
+				                    </shiro:hasPermission> --%>
 				                        <c:if test="${resource.type ne 'button'}">
 				                        	<a href="${pageContext.request.contextPath}/resource/${resource.id}/addPermission">添加子节点</a>
 				                        </c:if>
-				                    </shiro:hasPermission>
 				
-				                    <shiro:hasPermission name="resource:*">
 				                        <a href="${pageContext.request.contextPath}/resource/${resource.id}/update">修改</a>
 				                        <a class="deleteBtn" data-id="${resource.id}" href="${pageContext.request.contextPath}/resource/${resource.id}/delete">删除</a>
-				                    </shiro:hasPermission>
+				                   <%--  <shiro:hasPermission name="resource:*">
+				                    </shiro:hasPermission> --%>
 				                </td>
 				            </tr>
 			            

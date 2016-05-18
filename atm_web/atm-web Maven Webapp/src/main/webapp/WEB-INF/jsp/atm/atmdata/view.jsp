@@ -15,10 +15,12 @@
 <link href="${pageContext.request.contextPath}/resource/highCharts/css/styles.css" rel="stylesheet">
 
 <style type="text/css">
+body{
+	padding: 0px;
+}
 </style>
 </head>
 <body>
-	<div class="ui_text_indent">
 		<div id="box_border">
 			<div id="box_top">搜索</div>
 			<div id="box_center">
@@ -46,9 +48,8 @@
 	               </select>
 			</div>
 		</div>
-	</div>
 	<div class="row">
-		<div class="col-xs-12 col-md-3 col-lg-2">
+		<div class="col-xs-3 col-md-3 col-lg-2">
 			<div class="panel panel-blue panel-widget ">
 				<div class="row no-padding">
 					<div class="col-sm-4 col-lg-5 widget-left">
@@ -61,7 +62,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
+		<div class="col-xs-3 col-md-3 col-lg-2">
 			<div class="panel panel-yellow panel-widget ">
 				<div class="row no-padding">
 					<div class="col-sm-4 col-lg-5 widget-left">
@@ -74,7 +75,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
+		<div class="col-xs-3 col-md-3 col-lg-2">
 			<div class="panel panel-success panel-widget ">
 				<div class="row no-padding">
 					<div class="col-sm-4 col-lg-5 widget-left">
@@ -87,7 +88,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
+		<div class="col-xs-3 col-md-3 col-lg-2">
 			<div class="panel panel-orange panel-widget">
 				<div class="row no-padding">
 					<div class="col-sm-4 col-lg-5 widget-left">
@@ -100,7 +101,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
+		<div class="col-xs-3 col-md-3 col-lg-2">
 			<div class="panel panel-teal panel-widget">
 				<div class="row no-padding">
 					<div class="col-sm-4 col-lg-5 widget-left">
@@ -113,7 +114,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-md-3 col-lg-2">
+		<div class="col-xs-3 col-md-3 col-lg-2">
 			<div class="panel panel-red panel-widget">
 				<div class="row no-padding">
 					<div class="col-sm-4 col-lg-5 widget-left">
@@ -128,7 +129,54 @@
 		</div>
 	</div>
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-	<div id="container_table" style="min-width: 310px; height: 400px; margin: 0 auto">
+	<div id="container_table" style="min-width: 310px; margin: 0 auto">
+		<table class="table" cellspacing="0" cellpadding="0" width="90%" align="center" border="0">
+			<tr>
+				<th>ATM ID</th>
+				<th>总存款</th>
+				<th>总取款</th>
+				<th>总透支</th>
+				<th>总还信</th>
+				<th>总贷款</th>
+				<th>总还贷</th>
+			</tr>
+			<tr>
+				<td>10001</td>
+				<td>234334</td>
+				<td>34534</td>
+				<td>2342</td>
+				<td>123</td>
+				<td>5345</td>
+				<td>5004</td>
+			</tr>
+			<tr>
+				<td>10002</td>
+				<td>234334</td>
+				<td>34534</td>
+				<td>2342</td>
+				<td>123</td>
+				<td>5345</td>
+				<td>5004</td>
+			</tr>
+			<tr>
+				<td>10003</td>
+				<td>234334</td>
+				<td>34534</td>
+				<td>2342</td>
+				<td>123</td>
+				<td>5345</td>
+				<td>5004</td>
+			</tr>
+			<tr>
+				<td>10004</td>
+				<td>234334</td>
+				<td>34534</td>
+				<td>2342</td>
+				<td>123</td>
+				<td>5345</td>
+				<td>5004</td>
+			</tr>
+		</table>
 	</div>
 </body>
 <script type="text/javascript">
@@ -259,6 +307,10 @@ $(function () {
         title: {
             text: aa,
             x: -20 //center
+        },
+        credits:{
+            text:"",
+            href:""
         },
         subtitle: {
             text: 'ATM',

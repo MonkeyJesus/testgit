@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cwb.atmweb.dao.LogoperaterMapper" >
+  <resultMap id="BaseResultMap" type="com.cwb.atmweb.entity.Logoperater" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="userType" property="usertype" jdbcType="INTEGER" />
+    <result column="operateType" property="operatetype" jdbcType="INTEGER" />
+    <result column="operateName" property="operatename" jdbcType="VARCHAR" />
+    <result column="operateTime" property="operatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cwb.atmweb.entity.Logoperater" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, userType, operateType, operateName, operateTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from log_operater
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from log_operater
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cwb.atmweb.entity.Logoperater" >
+    insert into log_operater (id, userId, userType, 
+      operateType, operateName, operateTime, 
+      content)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{usertype,jdbcType=INTEGER}, 
+      #{operatetype,jdbcType=INTEGER}, #{operatename,jdbcType=VARCHAR}, #{operatetime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cwb.atmweb.entity.Logoperater" >
+    insert into log_operater
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="operatetype != null" >
+        operateType,
+      </if>
+      <if test="operatename != null" >
+        operateName,
+      </if>
+      <if test="operatetime != null" >
+        operateTime,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="operatetype != null" >
+        #{operatetype,jdbcType=INTEGER},
+      </if>
+      <if test="operatename != null" >
+        #{operatename,jdbcType=VARCHAR},
+      </if>
+      <if test="operatetime != null" >
+        #{operatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cwb.atmweb.entity.Logoperater" >
+    update log_operater
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="operatetype != null" >
+        operateType = #{operatetype,jdbcType=INTEGER},
+      </if>
+      <if test="operatename != null" >
+        operateName = #{operatename,jdbcType=VARCHAR},
+      </if>
+      <if test="operatetime != null" >
+        operateTime = #{operatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cwb.atmweb.entity.Logoperater" >
+    update log_operater
+    set userId = #{userid,jdbcType=BIGINT},
+      userType = #{usertype,jdbcType=INTEGER},
+      operateType = #{operatetype,jdbcType=INTEGER},
+      operateName = #{operatename,jdbcType=VARCHAR},
+      operateTime = #{operatetime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cwb.atmweb.entity.Logoperater" >
+    update log_operater
+    set userId = #{userid,jdbcType=BIGINT},
+      userType = #{usertype,jdbcType=INTEGER},
+      operateType = #{operatetype,jdbcType=INTEGER},
+      operateName = #{operatename,jdbcType=VARCHAR},
+      operateTime = #{operatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

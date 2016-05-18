@@ -82,10 +82,8 @@ public class UserRealm extends AuthorizingRealm {
 		if(strs[0].equals("1")){
 			Employee employee = employeeService.selectByUsername(((UsernamePasswordToken) token).getUsername().substring(2));
 			if (employee != null) {
-				
 				SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo("0_"+employee.getEmployeename(), employee.getPassword(), getName());
 				authcInfo.setCredentialsSalt(ByteSource.Util.bytes(employee.getEmployeename()+employee.getSalt()));
-				
 				this.setSession("currentUser", employee);
 				return authcInfo;
 			} else {
@@ -94,10 +92,8 @@ public class UserRealm extends AuthorizingRealm {
 		}else{
 			Account account = accountService.selectByUsername(((UsernamePasswordToken) token).getUsername().substring(2));
 			if (account != null) {
-				
 				SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo("1_"+account.getUsername(), account.getPassword(), getName());
 				authcInfo.setCredentialsSalt(ByteSource.Util.bytes(account.getUsername()+account.getSalt()));
-				
 				this.setSession("currentUser", account);
 				return authcInfo;
 			} else {

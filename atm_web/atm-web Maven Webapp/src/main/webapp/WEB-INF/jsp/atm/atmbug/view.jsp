@@ -26,6 +26,9 @@
 	rel="stylesheet">
 
 <style type="text/css">
+body{
+	padding: 0px;
+}
 #sider {
 	position: absolute;
 	top: 0;
@@ -81,6 +84,13 @@
 	color: #fff;
 	height: 37px;
 }
+
+.g{
+	background-color: #23b628;
+}
+.r{
+	background-color: #b51d1a;
+}
 </style>
 </head>
 <body>
@@ -106,7 +116,7 @@
 		</div>
 	</div>
 	<div id="box_table">
-		<div id="box_top">信息</div>
+		<div id="box_top" style=" text-align: left;">信息</div>
 		<div id="box_center">
 			<div id="main">
 				<ul id="fang_type">
@@ -117,33 +127,102 @@
 			</div>
 			<table class="unit-the-table table" cellspacing="0" cellpadding="0"
 					width="100%" align="center" border="0">
-					<thead id="unit-thead">
 						<tr>
 							<th>ID</th>
 							<th>银行名</th>
 							<th>制造商</th>
 							<th>规格</th>
-							<th>读卡器</th>
-							<th>打印其</th>
-							<th>扫描仪</th>
-							<th>存款系统</th>
-							<th>取款系统</th>
+							<th style="width: 10%">读卡器</th>
+							<th style="width: 10%">打印其</th>
+							<th style="width: 10%">扫描仪</th>
+							<th style="width: 10%">存款系统</th>
+							<th style="width: 10%">取款系统</th>
+							<th>维修</th>
 						</tr>
-					</thead>
-					<tbody>
 						<tr>
 							<td>10001</td>
 							<td>上海总行</td>
-							<td>阿萨德</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>brand2</td>
+							<td>model1</td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="r"></td>
+							<td class="r"></td>
+							<td>
+								<button type="button" id="addATM" class="btn btn-default">维修</button>
+							</td>
 						</tr>							
-					</tbody>
+						<tr>
+							<td>10002</td>
+							<td>上海总行</td>
+							<td>brand2</td>
+							<td>model1</td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="r"></td>
+							<td class="r"></td>
+							<td>
+								<button type="button" id="addATM" class="btn btn-default">维修</button>
+							</td>
+						</tr>							
+						<tr>
+							<td>10003</td>
+							<td>上海总行</td>
+							<td>brand2</td>
+							<td>model1</td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="r"></td>
+							<td class="r"></td>
+							<td>
+								<button type="button" id="addATM" class="btn btn-default">维修</button>
+							</td>
+						</tr>							
+						<tr>
+							<td>10004</td>
+							<td>上海总行</td>
+							<td>brand2</td>
+							<td>model1</td>
+							<td class="r"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="r"></td>
+							<td>
+								<button type="button" id="addATM" class="btn btn-default">维修</button>
+							</td>
+						</tr>							
+						<tr>
+							<td>10005</td>
+							<td>上海总行</td>
+							<td>brand2</td>
+							<td>model1</td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="r"></td>
+							<td class="g"></td>
+							<td class="r"></td>
+							<td>
+								<button type="button" id="addATM" class="btn btn-default">维修</button>
+							</td>
+						</tr>							
+						<tr>
+							<td>10006</td>
+							<td>上海总行</td>
+							<td>brand2</td>
+							<td>model1</td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td class="g"></td>
+							<td>
+								<button type="button" id="addATM" class="btn btn-default">维修</button>
+							</td>
+						</tr>							
 				</table>
 		</div>
 	</div>

@@ -15,6 +15,9 @@
 <link href="${pageContext.request.contextPath}/resource/highCharts/css/styles.css" rel="stylesheet">
 
 <style type="text/css">
+body{
+	padding: 0px;
+}
 .sel {
     width: 105px;
     text-align: center;
@@ -32,21 +35,17 @@
      background-color: #3580A9;
 }
 .but{
+	float: right;
  	width: 105px;
- 	height:40px;
     text-align: center;
-    padding: 1px 0;
+    padding: 3px 0;
     border: 1px solid #3580A9;
-    -moz-text-shadow: 0px -1px 0px #2C6AA3;
-    -webkit-text-shadow: 0px -1px 0px #2C6AA3;
-    -o-text-shadow: 0px -1px 0px #2C6AA3;
-    text-shadow: 0px -1px 0px #2C6AA3;
     color: #D4E6EF;
     border-radius: 3px 3px 3px 3px;
-    margin: 2px;
-    /* color: #6D6D6D; */
-    /* border: 1px solid #D0D2D4; */
      background-color: #3580A9;
+     margin-top:5px;
+     margin-right:5px;
+     line-height: 30px;
 }
 
 #left{
@@ -104,9 +103,7 @@
 				<div id="content">
 					时间区间：
 				  	<input type="date"  class="sel" style="width:150px;">
-				  	<diV style="margin-left: 30%;margin-top: -3%;">
-					  	<input type="button" value="查询" class="but">
-				  	</diV>
+				  	<input type="button" value="查询" class="but">
 				</div>
 		</div>
 	</div>
@@ -207,10 +204,14 @@ $(function () {
         subtitle: {
             text: ''
         },
+        credits:{
+            text:"",
+            href:""
+        },
         xAxis: {
-            categories: ['01:00', '02:00', '03:00', '04:00', '05:00',
-	                         '06:00', '07:00', '08:00', '09:00', '10:00', '11:00','12:00',
-		                         '13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00']
+            categories: ['1', '2', '03:00', '4', '5',
+	                         '6', '7', '8', '9', '10', '11','12',
+		                         '13','14','15','16','17','18','19','20','21','22','23','24']
         },
         yAxis: {
             title: {

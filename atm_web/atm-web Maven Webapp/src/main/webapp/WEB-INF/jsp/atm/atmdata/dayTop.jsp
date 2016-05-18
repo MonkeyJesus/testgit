@@ -16,6 +16,9 @@
 <link href="${pageContext.request.contextPath}/resource/highCharts/css/styles.css" rel="stylesheet">
 
 <style>
+body{
+	padding: 0px;
+}
 .sel {
     width: 105px;
     text-align: center;
@@ -33,21 +36,17 @@
      background-color: #3580A9;
 }
 .but{
+	float: right;
  	width: 105px;
- 	height:40px;
     text-align: center;
-    padding: 1px 0;
+    padding: 3px 0;
     border: 1px solid #3580A9;
-    -moz-text-shadow: 0px -1px 0px #2C6AA3;
-    -webkit-text-shadow: 0px -1px 0px #2C6AA3;
-    -o-text-shadow: 0px -1px 0px #2C6AA3;
-    text-shadow: 0px -1px 0px #2C6AA3;
     color: #D4E6EF;
     border-radius: 3px 3px 3px 3px;
-    margin: 2px;
-    /* color: #6D6D6D; */
-    /* border: 1px solid #D0D2D4; */
      background-color: #3580A9;
+     margin-top:5px;
+     margin-right:5px;
+     line-height: 30px;
 }
 
 #left{
@@ -92,11 +91,9 @@
 					<div id="content">
 						时间区间：
 					  	<input type="date"  class="sel" style="width:150px;"> --  <input type="date"  class="sel" style="width:150px;" /> 
-					  	<diV style="margin-left: 30%;margin-top: -3%;">
 					  	<input type="button" value="查询" class="but">
 						<input type="button" value="ATM" class="but"> 
 						<input type="button" value="Bank" class="but">
-					  	</diV>
 						
 					</div>
 			</div>
